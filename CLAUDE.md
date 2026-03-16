@@ -18,15 +18,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This project is in the **planning/design phase**. No implementation code exists yet - only documentation and frontend architecture specifications have been created.
 
-## Documentation Structure
+## Documentation
 
 | File | Description |
 |------|-------------|
-| `README.md` | Project overview, tech stack, development plan |
-| `requirements.md` | Detailed functional requirements specification |
-| `research.md` | Research on drone applications, use cases, and technology |
+| `requirements.md` | Detailed functional requirements (P0/P1/P2 priorities) |
+| `research.md` | Technology research, use cases, case studies |
 | `tasks.md` | Task tracking for project progress |
-| `frontend-architecture/` | Detailed frontend architecture design (62 pages, 95 components) |
+| `frontend-architecture/` | 62 pages, 95 components specifications |
 
 ## System Architecture (Planned)
 
@@ -40,37 +39,71 @@ Communication Layer (MAVLink, WebSocket, MQTT, 4G/5G)
 Device Layer (Drones, Hangars, Sensors, Cameras, Speakers)
 ```
 
-## Tech Stack (Planned)
+### Backend Structure (when implementing)
+```
+backend/
+├── src/
+│   ├── gateways/       # OpenClaw API gateway
+│   ├── schedulers/     # Task scheduling
+│   ├── vision/         # AI vision module
+│   ├── mavlink/        # Drone communication
+│   └── api/            # REST/WebSocket APIs
+```
+
+### Frontend Structure (follow frontend-architecture/)
+```
+frontend/
+├── pages/              # 14 modules, 62 pages
+│   ├── dashboard.md    # 3 pages
+│   ├── monitor.md      # 4 pages
+│   ├── tasks.md        # 6 pages
+│   └── ...
+└── components/         # 12 categories, 95 components
+```
+
+## Tech Stack
 
 - **Backend**: Node.js + Express
-- **AI Integration**: OpenClaw (supports multiple models: 智谱, 火山引擎)
-- **Database**: SQLite / PostgreSQL
-- **Hardware Interface**: MAVLink SDK
+- **AI Integration**: OpenClaw (智谱, 火山引擎)
+- **Database**: SQLite (dev) / PostgreSQL (prod)
+- **Hardware**: MAVLink SDK
 
 ### Frontend (from frontend-architecture/)
 - **Framework**: React 18+ / Vue 3
 - **UI Library**: Ant Design 5 / Element Plus
-- **Maps**: Leaflet / Mapbox GL / 高德地图 JS API
+- **Maps**: Leaflet / Mapbox GL / 高德地图
 - **Charts**: ECharts 5
-- **Build Tool**: Vite
 
-## Key Design Decisions from Documentation
+## Common Commands (when implemented)
 
-1. **OpenClaw Integration**: Natural language control - users can control drones via text/voice commands
-2. **Multi-drone Coordination**: Supports partitioned作业, relay missions, and formation flying
-3. **No-fly Zone Management**: Critical safety feature for campus environments
+```bash
+# Backend
+npm install            # Install dependencies
+npm run dev           # Start development server
+npm run build         # Build for production
+
+# Frontend
+npm install
+npm run dev           # Start Vite dev server
+npm run build         # Build for production
+npm run lint          # Lint code
+```
+
+## Key Design Decisions
+
+1. **OpenClaw Integration**: Natural language control - users control drones via text/voice
+2. **Multi-drone Coordination**: Partitioned作业, relay missions, formation flying
+3. **No-fly Zone Management**: Critical safety feature for campus
 4. **Privacy Protection**: Face blurring, data anonymization required
 5. **User Roles**: Admin, Security Staff, Operations, Teachers, Students
 
-## Working with This Project
+## Implementation Priority
 
-When implementing this project:
-
-1. **Start with backend**: Build the OpenClaw gateway, task scheduler, and MAVLink integration first
-2. **Use the frontend architecture specs**: The `frontend-architecture/` directory contains detailed page and component specifications to guide UI development
-3. **Follow the requirements**: `requirements.md` has priority annotations (P0/P1/P2) for feature implementation order
-4. **Reference research.md**: Contains technical solutions for indoor positioning, multi-drone coordination, and AI edge computing
+Follow `requirements.md` priority annotations:
+- **P0**: Core functionality (auto patrol, perimeter security, emergency response)
+- **P1**: Important features (facility inspection, event support)
+- **P2**: Enhancement features (logistics, environment monitoring)
 
 ## Language
 
-Project documentation is primarily in Chinese (Simplified). Code and technical terms should follow the existing patterns in the documentation.
+Project documentation is in Chinese (Simplified). Code and technical terms follow existing documentation patterns.
