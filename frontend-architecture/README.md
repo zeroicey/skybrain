@@ -109,16 +109,16 @@ frontend-architecture/
 
 | 类别 | 推荐技术 |
 |------|----------|
-| 框架 | React 18+ / Vue 3 |
-| 路由 | React Router 6 / Vue Router 4 |
-| 状态管理 | Redux Toolkit / Pinia |
-| UI组件库 | Ant Design 5 / Element Plus |
+| 框架 | React 18+ |
+| 包管理器 | Bun |
+| UI组件库 | shadcn/ui + Tailwind CSS |
+| 路由 | React Router 6 |
+| 状态管理 | Zustand / Redux Toolkit |
 | 地图 | Leaflet / Mapbox GL / 高德地图 JS API |
-| 图表 | ECharts 5 |
+| 图表 | [MUI Charts](https://mui.com/x/react-charts/quickstart/) |
 | 视频播放 | Video.js / flv.js / hls.js |
-| 表单 | React Hook Form / FormKit |
-| 拖拽 | dnd-kit / vue-draggable-plus |
-| 国际化 | i18next / vue-i18n |
+| 表单 | React Hook Form + Zod |
+| 拖拽 | [dndkit](https://dndkit.com/overview) |
 | 构建工具 | Vite |
 
 ---
