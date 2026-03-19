@@ -154,11 +154,13 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="mt-auto">
-        <div className="flex items-center justify-between px-2 py-2">
+        <div className="flex items-center justify-center px-2 py-2 w-full">
           <div className="text-xs text-muted-foreground">
             v1.0.0
           </div>
-          <ModeToggle />
+          <div className="group-data-[collapsible=icon]:hidden absolute right-2">
+            <ModeToggle />
+          </div>
         </div>
       </SidebarFooter>
     </Sidebar>
