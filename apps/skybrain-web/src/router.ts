@@ -12,6 +12,13 @@ const RegisterPage = lazy(() => import("@/pages/auth/register"));
 
 const MultiMonitorPage = lazy(() => import("@/pages/modules/monitor/multi-monitor-page"));
 
+const TaskListPage = lazy(() => import("@/pages/modules/task/task-list-page"));
+const TaskDetailPage = lazy(() => import("@/pages/modules/task/task-detail-page"));
+const TaskCreatePage = lazy(() => import("@/pages/modules/task/task-create-page"));
+const TaskEditPage = lazy(() => import("@/pages/modules/task/task-edit-page"));
+const TaskSchedulePage = lazy(() => import("@/pages/modules/task/task-schedule-page"));
+const TaskLogsPage = lazy(() => import("@/pages/modules/task/task-logs-page"));
+
 
 const router = createBrowserRouter([
     {
@@ -29,6 +36,17 @@ const router = createBrowserRouter([
                         path: "monitor",
                         children: [
                             { path: "multi", Component: MultiMonitorPage }
+                        ]
+                    },
+                    {
+                        path: "tasks",
+                        children: [
+                            { index: true, Component: TaskListPage },
+                            { path: "create", Component: TaskCreatePage },
+                            { path: ":id", Component: TaskDetailPage },
+                            { path: ":id/edit", Component: TaskEditPage },
+                            { path: "schedule", Component: TaskSchedulePage },
+                            { path: "logs", Component: TaskLogsPage },
                         ]
                     },
                 ],
