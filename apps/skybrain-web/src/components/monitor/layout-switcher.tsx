@@ -7,11 +7,11 @@ interface LayoutSwitcherProps {
   onChange: (value: LayoutMode) => void
 }
 
-const options = [
+const options: { value: string; label: string; icon: typeof Square }[] = [
   { value: '1x2', label: '1x2', icon: Square },
   { value: '2x2', label: '2x2', icon: LayoutGrid },
   { value: '3x3', label: '3x3', icon: Grid3X3 },
-] as const
+]
 
 export function LayoutSwitcher({ value, onChange }: LayoutSwitcherProps) {
   return (

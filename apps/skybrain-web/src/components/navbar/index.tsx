@@ -2,6 +2,8 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { useLocation } from "react-router";
 import MonitorMultiNav from "./contents/monitor-multi";
+import MonitorLiveNav from "./contents/monitor-live";
+import MonitorPlaybackNav from "./contents/monitor-playback";
 import TaskListNav from "./contents/task-list";
 import TaskDetailNav from "./contents/task-detail";
 import TaskCreateNav from "./contents/task-create";
@@ -10,7 +12,9 @@ import TaskScheduleNav from "./contents/task-schedule";
 import TaskLogsNav from "./contents/task-logs";
 
 const rightContents = new Map<string, React.ReactNode>([
-  ["/monitor/multi", <MonitorMultiNav key="monitor" />],
+  ["/monitor/live", <MonitorLiveNav key="monitor-live" />],
+  ["/monitor/playback", <MonitorPlaybackNav key="monitor-playback" />],
+  ["/monitor/multi", <MonitorMultiNav key="monitor-multi" />],
   ["/tasks", <TaskListNav key="tasks" />],
   ["/tasks/create", <TaskCreateNav key="tasks-create" />],
   ["/tasks/schedule", <TaskScheduleNav key="tasks-schedule" />],

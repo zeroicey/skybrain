@@ -1,4 +1,4 @@
-import { Home, Video, ListTodo, Shield, Plane, BarChart, Settings, Bot, Users, User, Clock, Battery, Warehouse, Map, Ban, FileText, Mic, MessageSquare, FileEdit, Eye, Play, Grid3X3, Plus, Calendar, AlertTriangle, Siren, Drone, Gauge, ClipboardList, ScanEye } from "lucide-react"
+import { Home, Video, ListTodo, Shield, Plane, BarChart, Settings, Bot, Users, User, Clock, Battery, Warehouse, Map, Ban, FileText, Mic, MessageSquare, FileEdit, Eye, Play, Grid3X3, Plus, Calendar, AlertTriangle, Siren, Drone, Gauge, ClipboardList, ScanEye, TrendingUp, Utensils, Building2, GraduationCap, DoorOpen, UsersRound } from "lucide-react"
 
 import {
   Sidebar,
@@ -23,8 +23,7 @@ const navItems = [
     icon: Home,
     items: [
       { title: "仪表盘", url: "/dashboard", icon: Home },
-      { title: "安保态势", url: "/dashboard/security", icon: Shield },
-      { title: "飞行态势", url: "/dashboard/flight", icon: Plane },
+      { title: "数据大屏", url: "/analytics/overview", icon: BarChart },
     ],
   },
   {
@@ -35,6 +34,19 @@ const navItems = [
       { title: "视频监控", url: "/monitor/live", icon: Eye },
       { title: "监控回放", url: "/monitor/playback", icon: Play },
       { title: "多路监控", url: "/monitor/multi", icon: Grid3X3 },
+    ],
+  },
+  {
+    title: "场景分析",
+    url: "/scenes",
+    icon: TrendingUp,
+    items: [
+      { title: "饭堂人流", url: "/scenes/canteen", icon: Utensils },
+      { title: "街道商铺", url: "/scenes/street", icon: Building2 },
+      { title: "宿舍区域", url: "/scenes/dormitory", icon: UsersRound },
+      { title: "教学楼", url: "/scenes/classroom", icon: GraduationCap },
+      { title: "校门通行", url: "/scenes/gate", icon: DoorOpen },
+      { title: "人流预测", url: "/scenes/forecast", icon: TrendingUp },
     ],
   },
   {
@@ -78,15 +90,6 @@ const navItems = [
       { title: "禁飞管理", url: "/flight/no-fly", icon: Ban },
       { title: "实时监控", url: "/flight/monitor", icon: Gauge },
       { title: "飞行记录", url: "/flight/records", icon: FileText },
-    ],
-  },
-  {
-    title: "数据分析",
-    url: "/analytics",
-    icon: BarChart,
-    items: [
-      { title: "数据大屏", url: "/analytics/overview", icon: BarChart },
-      { title: "运营报表", url: "/analytics/reports", icon: FileText },
     ],
   },
   {

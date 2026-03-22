@@ -11,6 +11,8 @@ const LoginPage = lazy(() => import("@/pages/auth/login"));
 const RegisterPage = lazy(() => import("@/pages/auth/register"));
 
 const MultiMonitorPage = lazy(() => import("@/pages/modules/monitor/multi-monitor-page"));
+const MonitorLivePage = lazy(() => import("@/pages/modules/monitor/live-page"));
+const MonitorPlaybackPage = lazy(() => import("@/pages/modules/monitor/playback-page"));
 
 const TaskListPage = lazy(() => import("@/pages/modules/task/task-list-page"));
 const TaskDetailPage = lazy(() => import("@/pages/modules/task/task-detail-page"));
@@ -35,6 +37,8 @@ const router = createBrowserRouter([
                     {
                         path: "monitor",
                         children: [
+                            { path: "live", Component: MonitorLivePage },
+                            { path: "playback", Component: MonitorPlaybackPage },
                             { path: "multi", Component: MultiMonitorPage }
                         ]
                     },

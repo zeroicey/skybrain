@@ -17,13 +17,6 @@ export default function MultiMonitorPage() {
 
   const drones = activeDrones.filter(d => d.status !== 'offline')
 
-  const handleAddDrone = (drone: Drone) => {
-    const updatedDrones = activeDrones.map(d =>
-      d.id === drone.id ? { ...d, status: 'online' as const } : d
-    )
-    setDroneState(updatedDrones.filter(d => d.status !== 'offline'), updatedDrones)
-  }
-
   const handleFullscreen = (drone: Drone) => {
     console.log('进入全屏:', drone.name)
   }
