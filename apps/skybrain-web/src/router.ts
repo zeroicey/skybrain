@@ -21,6 +21,8 @@ const TaskEditPage = lazy(() => import("@/pages/modules/task/task-edit-page"));
 const TaskSchedulePage = lazy(() => import("@/pages/modules/task/task-schedule-page"));
 const TaskLogsPage = lazy(() => import("@/pages/modules/task/task-logs-page"));
 
+const CanteenPage = lazy(() => import("@/pages/modules/scene/canteen-page"));
+
 
 const router = createBrowserRouter([
     {
@@ -51,6 +53,12 @@ const router = createBrowserRouter([
                             { path: ":id/edit", Component: TaskEditPage },
                             { path: "schedule", Component: TaskSchedulePage },
                             { path: "logs", Component: TaskLogsPage },
+                        ]
+                    },
+                    {
+                        path: "scenes",
+                        children: [
+                            { path: "canteen", Component: CanteenPage },
                         ]
                     },
                 ],
