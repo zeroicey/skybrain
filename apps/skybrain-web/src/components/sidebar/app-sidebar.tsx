@@ -42,11 +42,10 @@ const navItems = [
     icon: TrendingUp,
     items: [
       { title: "饭堂人流", url: "/scenes/canteen", icon: Utensils },
-      { title: "街道商铺", url: "/scenes/street", icon: Building2 },
+      { title: "街道商铺", url: "/scenes/shops", icon: Building2 },
       { title: "宿舍区域", url: "/scenes/dormitory", icon: UsersRound },
-      { title: "教学楼", url: "/scenes/classroom", icon: GraduationCap },
+      { title: "教学楼", url: "/scenes/building", icon: GraduationCap },
       { title: "校门通行", url: "/scenes/gate", icon: DoorOpen },
-      { title: "人流预测", url: "/scenes/forecast", icon: TrendingUp },
     ],
   },
   {

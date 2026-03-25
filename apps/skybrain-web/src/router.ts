@@ -22,6 +22,10 @@ const TaskSchedulePage = lazy(() => import("@/pages/modules/task/task-schedule-p
 const TaskLogsPage = lazy(() => import("@/pages/modules/task/task-logs-page"));
 
 const CanteenPage = lazy(() => import("@/pages/modules/scene/canteen-page"));
+const ShopsPage = lazy(() => import("@/pages/modules/scene/shops-page"));
+const DormitoryPage = lazy(() => import("@/pages/modules/scene/dormitory-page"));
+const BuildingPage = lazy(() => import("@/pages/modules/scene/building-page"));
+const GatePage = lazy(() => import("@/pages/modules/scene/gate-page"));
 
 
 const router = createBrowserRouter([
@@ -59,6 +63,10 @@ const router = createBrowserRouter([
                         path: "scenes",
                         children: [
                             { path: "canteen", Component: CanteenPage },
+                            { path: "shops", Component: ShopsPage },
+                            { path: "dormitory", Component: DormitoryPage },
+                            { path: "building", Component: BuildingPage },
+                            { path: "gate", Component: GatePage },
                         ]
                     },
                 ],

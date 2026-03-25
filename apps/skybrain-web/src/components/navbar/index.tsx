@@ -11,12 +11,20 @@ import TaskEditNav from "./contents/task-edit";
 import TaskScheduleNav from "./contents/task-schedule";
 import TaskLogsNav from "./contents/task-logs";
 import CanteenNav from "./contents/canteen";
+import ShopNav from "./contents/shop";
+import DormitoryNav from "./contents/dormitory";
+import BuildingNav from "./contents/building";
+import GateNav from "./contents/gate";
 
 const rightContents = new Map<string, React.ReactNode>([
   ["/monitor/live", <MonitorLiveNav key="monitor-live" />],
   ["/monitor/playback", <MonitorPlaybackNav key="monitor-playback" />],
   ["/monitor/multi", <MonitorMultiNav key="monitor-multi" />],
   ["/scenes/canteen", <CanteenNav key="canteen" />],
+  ["/scenes/shops", <ShopNav key="shops" />],
+  ["/scenes/dormitory", <DormitoryNav key="dormitory" />],
+  ["/scenes/building", <BuildingNav key="building" />],
+  ["/scenes/gate", <GateNav key="gate" />],
   ["/tasks", <TaskListNav key="tasks" />],
   ["/tasks/create", <TaskCreateNav key="tasks-create" />],
   ["/tasks/schedule", <TaskScheduleNav key="tasks-schedule" />],

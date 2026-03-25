@@ -120,7 +120,7 @@ export const useCanteenStore = create<CanteenStore>((set, get) => {
 
     // 刷新所有数据
     refreshAllData: () => {
-      const { selectedCanteen, selectedCanteenId } = get()
+      const { selectedCanteen } = get()
       if (!selectedCanteen) return
 
       const statCard = generateStatCardData()
