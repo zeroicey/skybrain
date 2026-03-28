@@ -121,9 +121,9 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       {/* Logo 区域 - 使用 SidebarHeader 确保在顶部 */}
       <SidebarHeader className="py-4">
-        <div className="flex items-center gap-2 px-2">
+        <div className="flex items-center justify-center px-2 w-full">
           <ScanEye className="h-6 w-6 shrink-0" />
-          <span className="font-bold text-lg group-data-[collapsible=icon]:hidden">SkyBrain</span>
+          <span className="font-bold text-lg ml-2 group-data-[collapsible=icon]:hidden">SkyBrain</span>
         </div>
       </SidebarHeader>
 

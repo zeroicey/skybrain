@@ -85,8 +85,8 @@ export default function ShopsPage() {
     <div className="h-full overflow-auto p-3 no-scrollbar">
       <div className="flex gap-3">
         {/* 左侧 */}
-        <div className="w-[280px] flex-shrink-0 flex flex-col gap-4">
-          <div className="min-h-[100px]">
+        <div className="w-[280px] flex-shrink-0 flex flex-col justify-around overflow-hidden">
+          <div className="min-h-[90px]">
             <h3 className="text-xs font-medium mb-1 text-muted-foreground">拥堵指数</h3>
             <div className="h-[calc(100%-20px)] flex items-center justify-center">
               <div className="relative w-20 h-20">
@@ -111,9 +111,9 @@ export default function ShopsPage() {
             </div>
           </div>
 
-          <Separator className="my-2" />
+          <Separator className="my-1" />
 
-          <div className="min-h-[80px]">
+          <div className="min-h-[70px]">
             <h3 className="text-xs font-medium mb-1 text-muted-foreground">今日累计</h3>
             <div className="h-[calc(100%-20px)] flex items-center justify-center">
               <div className="text-center">
@@ -124,9 +124,9 @@ export default function ShopsPage() {
             </div>
           </div>
 
-          <Separator className="my-2" />
+          <Separator className="my-1" />
 
-          <div className="flex-1 min-h-[110px]">
+          <div className="min-h-[100px]">
             <h3 className="text-xs font-medium mb-1 text-muted-foreground">商铺热度</h3>
             <div className="h-[calc(100%-20px)]">
               <div className="space-y-2">
@@ -149,11 +149,11 @@ export default function ShopsPage() {
             </div>
           </div>
 
-          <Separator className="my-2" />
+          <Separator className="my-1" />
 
-          <div className="flex-1 min-h-[160px]">
-            <h3 className="mb-1 text-muted-foreground">客流来源</h3>
-            <div className="h-[calc(100%-20px)]">
+          <div className="min-h-[180px] flex flex-col">
+            <h3 className="text-xs font-medium mb-1 text-muted-foreground">客流来源</h3>
+            <div className="flex-1 min-h-0">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -161,7 +161,7 @@ export default function ShopsPage() {
                     cx="50%"
                     cy="50%"
                     innerRadius={30}
-                    outerRadius={60}
+                    outerRadius={55}
                     paddingAngle={2}
                     dataKey="value"
                   >
@@ -173,7 +173,7 @@ export default function ShopsPage() {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="flex flex-wrap gap-x-3 gap-y-1.5">
+            <div className="flex flex-wrap gap-x-3 gap-y-1">
               {pieData.map((item) => (
                 <div key={item.name} className="flex items-center gap-1 text-xs">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />

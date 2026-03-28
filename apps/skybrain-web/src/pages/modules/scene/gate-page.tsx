@@ -76,8 +76,8 @@ export default function GatePage() {
   return (
     <div className="h-full overflow-auto p-3 no-scrollbar">
       <div className="flex gap-3">
-        <div className="w-[280px] flex-shrink-0 flex flex-col gap-4">
-          <div className="min-h-[100px]">
+        <div className="w-[280px] flex-shrink-0 flex flex-col justify-around overflow-hidden">
+          <div className="min-h-[90px]">
             <h3 className="text-xs font-medium mb-1 text-muted-foreground">拥堵指数</h3>
             <div className="h-[calc(100%-20px)] flex items-center justify-center">
               <div className="relative w-20 h-20">
@@ -92,9 +92,9 @@ export default function GatePage() {
             </div>
           </div>
 
-          <Separator className="my-2" />
+          <Separator className="my-1" />
 
-          <div className="min-h-[80px]">
+          <div className="min-h-[70px]">
             <h3 className="text-xs font-medium mb-1 text-muted-foreground">今日累计</h3>
             <div className="h-[calc(100%-20px)] flex items-center justify-center">
               <div className="text-center">
@@ -105,9 +105,9 @@ export default function GatePage() {
             </div>
           </div>
 
-          <Separator className="my-2" />
+          <Separator className="my-1" />
 
-          <div className="flex-1 min-h-[110px]">
+          <div className="min-h-[100px]">
             <h3 className="text-xs font-medium mb-1 text-muted-foreground">时段人数</h3>
             <div className="h-[calc(100%-20px)]">
               <div className="space-y-2">
@@ -124,21 +124,21 @@ export default function GatePage() {
             </div>
           </div>
 
-          <Separator className="my-2" />
+          <Separator className="my-1" />
 
-          <div className="flex-1 min-h-[160px]">
-            <h3 className="mb-1 text-muted-foreground">身份分布</h3>
-            <div className="h-[calc(100%-20px)]">
+          <div className="min-h-[180px] flex flex-col">
+            <h3 className="text-xs font-medium mb-1 text-muted-foreground">身份分布</h3>
+            <div className="flex-1 min-h-0">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie data={pieData} cx="50%" cy="50%" innerRadius={30} outerRadius={60} paddingAngle={2} dataKey="value">
+                  <Pie data={pieData} cx="50%" cy="50%" innerRadius={30} outerRadius={55} paddingAngle={2} dataKey="value">
                     {pieData.map((entry, index) => (<Cell key={`cell-${index}`} fill={entry.color} />))}
                   </Pie>
                   <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '4px', fontSize: '11px' }} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="flex flex-wrap gap-x-3 gap-y-1.5">
+            <div className="flex flex-wrap gap-x-3 gap-y-1">
               {pieData.map((item) => (
                 <div key={item.name} className="flex items-center gap-1 text-xs">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
