@@ -19,6 +19,8 @@ import { generateSourceDistribution, shopCameras } from '@/data/mock-shops'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { useVideoChannels, getStreamUrl } from '@/hooks/useVideoChannels'
+import { VideoPlayer } from '@/components/monitor/video-player'
 
 const COLORS = {
   primary: '#3b82f6',
@@ -55,6 +57,18 @@ export default function ShopsPage() {
 
   const [selectedCamera, setSelectedCamera] = useState(shopCameras[0].id)
   const [isVideoPlaying, setIsVideoPlaying] = useState(true)
+
+  // 视频流
+  const { getRandomChannel, loading: videoLoading } = useVideoChannels()
+  const [streamUrl, setStreamUrl] = useState<string | null>(null)
+
+  // 初始化时随机获取视频
+  useEffect(() => {
+    const channel = getRandomChannel('street')
+    if (channel) {
+      setStreamUrl(getStreamUrl(channel.id))
+    }
+  }, [])
 
   useEffect(() => {
     refreshAllData()
@@ -217,19 +231,20 @@ export default function ShopsPage() {
           </div>
 
           <div className="relative rounded-lg overflow-hidden bg-slate-900 aspect-video">
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-              <div className="text-center">
-                <Camera className="w-16 h-16 text-slate-600 mx-auto mb-3" />
-                <p className="text-slate-500 text-sm">实时视频流</p>
-                <p className="text-slate-600 text-xs mt-1">
-                  {shopCamerasFiltered.find((c) => c.id === selectedCamera)?.name}
-                </p>
+            {streamUrl ? (
+              <VideoPlayer streamUrl={streamUrl} isLoading={videoLoading} />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+                <div className="text-center">
+                  <Camera className="w-16 h-16 text-slate-600 mx-auto mb-3" />
+                  <p className="text-slate-500 text-sm">等待视频信号...</p>
+                </div>
               </div>
-              <div className="absolute bottom-3 left-3 bg-black/70 rounded px-2 py-1 flex items-center gap-2">
-                <Users className="w-4 h-4 text-blue-400" />
-                <span className="text-white font-mono text-lg">{realtimeCount}</span>
-                <span className="text-slate-400 text-xs">人</span>
-              </div>
+            )}
+            <div className="absolute bottom-3 left-3 bg-black/70 rounded px-2 py-1 flex items-center gap-2">
+              <Users className="w-4 h-4 text-blue-400" />
+              <span className="text-white font-mono text-lg">{realtimeCount}</span>
+              <span className="text-slate-400 text-xs">人</span>
             </div>
           </div>
 

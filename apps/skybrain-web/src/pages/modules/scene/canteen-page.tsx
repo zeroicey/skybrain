@@ -19,6 +19,8 @@ import { generateAreaDistribution, cameras } from '@/data/mock-canteens'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { useVideoChannels, getStreamUrl } from '@/hooks/useVideoChannels'
+import { VideoPlayer } from '@/components/monitor/video-player'
 
 // 颜色配置
 const COLORS = {
@@ -56,6 +58,18 @@ export default function CanteenPage() {
 
   const [selectedCamera, setSelectedCamera] = useState(cameras[0].id)
   const [isVideoPlaying, setIsVideoPlaying] = useState(true)
+
+  // 视频流
+  const { getRandomChannel, loading: videoLoading } = useVideoChannels()
+  const [streamUrl, setStreamUrl] = useState<string | null>(null)
+
+  // 初始化时随机获取视频
+  useEffect(() => {
+    const channel = getRandomChannel('canteen')
+    if (channel) {
+      setStreamUrl(getStreamUrl(channel.id))
+    }
+  }, [])
 
   // 初始化时刷新数据
   useEffect(() => {
@@ -251,22 +265,22 @@ export default function CanteenPage() {
 
           {/* 视频区域 - 使用 aspect-video 保持16:9 */}
           <div className="relative rounded-lg overflow-hidden bg-slate-900 aspect-video">
-            {/* 视频内容 */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-              <div className="text-center">
-                <Camera className="w-16 h-16 text-slate-600 mx-auto mb-3" />
-                <p className="text-slate-500 text-sm">实时视频流</p>
-                <p className="text-slate-600 text-xs mt-1">
-                  {canteenCameras.find((c) => c.id === selectedCamera)?.name}
-                </p>
+            {streamUrl ? (
+              <VideoPlayer streamUrl={streamUrl} isLoading={videoLoading} />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+                <div className="text-center">
+                  <Camera className="w-16 h-16 text-slate-600 mx-auto mb-3" />
+                  <p className="text-slate-500 text-sm">等待视频信号...</p>
+                </div>
               </div>
+            )}
 
-              {/* 人数识别叠加层 */}
-              <div className="absolute bottom-3 left-3 bg-black/70 rounded px-2 py-1 flex items-center gap-2">
-                <Users className="w-4 h-4 text-blue-400" />
-                <span className="text-white font-mono text-lg">{realtimeCount}</span>
-                <span className="text-slate-400 text-xs">人</span>
-              </div>
+            {/* 人数识别叠加层 */}
+            <div className="absolute bottom-3 left-3 bg-black/70 rounded px-2 py-1 flex items-center gap-2">
+              <Users className="w-4 h-4 text-blue-400" />
+              <span className="text-white font-mono text-lg">{realtimeCount}</span>
+              <span className="text-slate-400 text-xs">人</span>
             </div>
           </div>
 
