@@ -14,84 +14,24 @@ const colors = {
   pinkLight: "#ff9eca",
 };
 
+import { useGLTF } from "@react-three/drei";
+
 function DroneModel() {
-  const groupRef = useRef<THREE.Group>(null);
-  const propRefs = useRef<THREE.Mesh[]>([]);
-
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.15;
-      groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.5) * 0.02;
-    }
-
-    propRefs.current.forEach((prop) => {
-      if (prop) prop.rotation.y += 0.3;
-    });
-  });
+  const { nodes, materials } = useGLTF("/drone3d.glb");
 
   return (
-    <group ref={groupRef} scale={1.2}>
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[1.2, 0.25, 1.2]} />
-        <meshStandardMaterial color="#1a2e1a" metalness={0.6} roughness={0.3} />
-      </mesh>
-
-      <mesh position={[0, 0.15, 0]}>
-        <cylinderGeometry args={[0.5, 0.6, 0.15, 32]} />
-        <meshStandardMaterial color="#2d4a2d" metalness={0.7} roughness={0.2} />
-      </mesh>
-
-      {[[-0.7, 0, -0.7], [0.7, 0, -0.7], [-0.7, 0, 0.7], [0.7, 0, 0.7]].map((pos, i) => (
-        <mesh key={i} position={pos as [number, number, number]} rotation={[0, Math.PI / 4 + (i * Math.PI) / 2, 0]}>
-          <boxGeometry args={[0.6, 0.08, 0.08]} />
-          <meshStandardMaterial color="#3d5c3d" metalness={0.8} roughness={0.2} />
-        </mesh>
-      ))}
-
-      {[[-0.9, 0.1, -0.9], [0.9, 0.1, -0.9], [-0.9, 0.1, 0.9], [0.9, 0.1, 0.9]].map((pos, i) => (
-        <group key={i} position={pos as [number, number, number]}>
-          <mesh>
-            <cylinderGeometry args={[0.12, 0.12, 0.1, 16]} />
-            <meshStandardMaterial color="#4a6b4a" metalness={0.9} roughness={0.1} />
-          </mesh>
-          <mesh ref={(el) => { if (el) propRefs.current[i] = el; }} position={[0, 0.08, 0]}>
-            <cylinderGeometry args={[0.35, 0.35, 0.02, 2]} />
-            <meshStandardMaterial color="#5a8a5a" metalness={0.5} roughness={0.4} transparent opacity={0.8} />
-          </mesh>
-        </group>
-      ))}
-
-      <mesh position={[0, -0.2, 0.5]}>
-        <sphereGeometry args={[0.15, 16, 16]} />
-        <meshStandardMaterial color="#1a1a1a" metalness={1} roughness={0} />
-      </mesh>
-
-      <mesh position={[0, -0.2, 0.62]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.05, 0.05, 0.08, 16]} />
-        <meshStandardMaterial color="#2d2d2d" metalness={1} roughness={0} />
-      </mesh>
-
-      {/* Colorful LED lights */}
-      {[[0.4, 0.05, 0.4], [-0.4, 0.05, 0.4], [0.4, 0.05, -0.4], [-0.4, 0.05, -0.4]].map((pos, i) => {
-        const ledColors = [colors.green, colors.orange, colors.pink, colors.green];
-        return (
-          <group key={i} position={pos as [number, number, number]}>
-            <mesh>
-              <sphereGeometry args={[0.03, 8, 8]} />
-              <meshStandardMaterial color={ledColors[i]} emissive={ledColors[i]} emissiveIntensity={2} />
-            </mesh>
-            <pointLight position={[0, 0.1, 0]} color={ledColors[i]} intensity={0.4} distance={2} />
-          </group>
-        );
-      })}
-
-      <mesh position={[0, -0.18, 0]}>
-        <boxGeometry args={[0.3, 0.02, 0.3]} />
-        <meshStandardMaterial color="#2d4a2d" metalness={0.8} roughness={0.2} />
-      </mesh>
+    <group dispose={null} scale={4}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes[Object.keys(nodes)[0]]?.geometry}
+        material={materials[Object.keys(materials)[0]]}
+      />
     </group>
   );
 }
+
+useGLTF.preload("/drone3d.glb");
 
 function ParticleRing() {
   const points = useRef<THREE.Points>(null);
@@ -123,10 +63,10 @@ function ParticleRing() {
 function HeroScene() {
   return (
     <Canvas camera={{ position: [0, 1, 4], fov: 50 }}>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={0.8} color="#fff5f0" />
-      <directionalLight position={[-5, 3, -5]} intensity={0.3} color={colors.orange} />
-      <pointLight position={[0, 2, 0]} intensity={0.5} color={colors.pink} />
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[5, 5, 5]} intensity={1.2} color="#ffffff" />
+      <directionalLight position={[-5, 3, -5]} intensity={0.6} color="#fff5f0" />
+      <pointLight position={[0, 2, 0]} intensity={0.8} color="#ffffff" />
       <DroneModel />
       <ParticleRing />
       <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.3} maxPolarAngle={Math.PI / 1.8} minPolarAngle={Math.PI / 3} />
