@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 	"os"
@@ -16,6 +17,19 @@ var videoExtensions = []string{".mp4", ".avi", ".mkv", ".mov", ".flv", ".wmv"}
 type Channel struct {
 	Name  string // channel 名称，如 "1", "canteen/1"
 	Path  string // 视频文件完整路径
+	Scene string // 场景标识: "root", "canteen", "street" 等
+}
+
+// ChannelInfo API 响应结构体
+type ChannelInfo struct {
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+	Scene string `json:"scene"`
+}
+
+// ChannelResponse API 响应包装
+type ChannelResponse struct {
+	Channels []ChannelInfo `json:"channels"`
 }
 
 // isVideoFile 检查文件是否为视频文件
@@ -63,6 +77,7 @@ func scanVideosDir() []Channel {
 		channels = append(channels, Channel{
 			Name:  string(rune('1' + i)), // 1, 2, 3...
 			Path:  filepath.Join(videosDir, filename),
+			Scene: "root",
 		})
 	}
 
@@ -96,6 +111,7 @@ func scanVideosDir() []Channel {
 			channels = append(channels, Channel{
 				Name:  filepath.Join(scene, string(rune('1'+i))),
 				Path:  filepath.Join(sceneDir, filename),
+				Scene: scene,
 			})
 		}
 	}
@@ -180,6 +196,9 @@ func main() {
 	fs := http.FileServer(http.Dir("./output"))
 	http.Handle("/", corsMiddleware(fs))
 
+	// 注册 /api/channels 接口
+	http.HandleFunc("/api/channels", handleChannels)
+
 	log.Println("HTTP 服务已启动，监听端口: 8889")
 	log.Println("示例播放链接: http://localhost:8889/1/index.m3u8")
 
@@ -187,4 +206,27 @@ func main() {
 	if err != nil {
 		log.Fatalf("HTTP 服务器启动失败: %v", err)
 	}
+}
+
+// handleChannels 处理 /api/channels 请求
+func handleChannels(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	channels := scanVideosDir()
+	var channelInfos []ChannelInfo
+	for _, ch := range channels {
+		channelInfos = append(channelInfos, ChannelInfo{
+			ID:    ch.Name,
+			Name:  filepath.Base(ch.Path),
+			Scene: ch.Scene,
+		})
+	}
+
+	jsonBytes, err := json.Marshal(ChannelResponse{Channels: channelInfos})
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+	w.Write(jsonBytes)
 }
