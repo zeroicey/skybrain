@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 )
 
 // 支持的视频文件扩展名
@@ -135,35 +136,42 @@ func corsMiddleware(next http.Handler) http.Handler {
 
 // 启动推流守护进程
 func startStream(channelName, videoPath string) {
-	// 创建频道专属的输出目录
-	outDir := filepath.Join("output", channelName)
-	err := os.MkdirAll(outDir, 0755)
-	if err != nil {
-		log.Fatalf("无法创建输出目录 %s: %v", outDir, err)
-	}
+	for {
+		// 创建频道专属的输出目录
+		outDir := filepath.Join("output", channelName)
+		err := os.MkdirAll(outDir, 0755)
+		if err != nil {
+			log.Printf("无法创建输出目录 %s: %v", outDir, err)
+			time.Sleep(5 * time.Second)
+			continue
+		}
 
-	m3u8Path := filepath.Join(outDir, "index.m3u8")
-	log.Printf("开始推流频道: %s (视频: %s)", channelName, videoPath)
+		m3u8Path := filepath.Join(outDir, "index.m3u8")
+		log.Printf("开始推流频道: %s (视频: %s)", channelName, videoPath)
 
-	// 组装 FFmpeg 命令
-	cmd := exec.Command("ffmpeg",
-		"-stream_loop", "-1", // 无限循环播放
-		"-re",                // 以视频原生帧率读取
-		"-i", videoPath,      // 输入文件
-		"-c:v", "libx264",    // 强制转码为 H.264
-		"-c:a", "aac",        // 强制转码音频为 AAC
-		"-preset", "veryfast",
-		"-f", "hls",
-		"-hls_time", "4",
-		"-hls_list_size", "5",
-		"-hls_flags", "delete_segments",
-		m3u8Path,
-	)
+		// 组装 FFmpeg 命令
+		cmd := exec.Command("ffmpeg",
+			"-re",                // 以视频原生帧率读取
+			"-stream_loop", "-1", // 无限循环
+			"-i", videoPath,      // 输入文件
+			"-c:v", "libx264",    // 强制转码为 H.264
+			"-preset", "veryfast",
+			"-f", "hls",
+			"-hls_time", "4",
+			"-hls_list_size", "10",
+			"-hls_flags", "delete_segments+append_list+omit_endlist",
+			"-start_number", "1",
+			m3u8Path,
+		)
 
-	cmd.Stderr = os.Stderr
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
 
-	if err := cmd.Run(); err != nil {
-		log.Printf("频道 %s 推流意外结束: %v", channelName, err)
+		// 等待当前推流结束（通常不会结束，除非出错）
+		if err := cmd.Run(); err != nil {
+			log.Printf("频道 %s 推流异常退出: %v，5秒后重试...", channelName, err)
+			time.Sleep(5 * time.Second)
+		}
 	}
 }
 
