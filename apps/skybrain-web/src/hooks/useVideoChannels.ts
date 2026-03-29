@@ -6,7 +6,7 @@ export interface ChannelInfo {
   scene: string
 }
 
-const API_BASE_URL = 'http://localhost:8889'
+const API_BASE_URL = 'http://192.168.5.150:8889'
 
 export function useVideoChannels() {
   const [channels, setChannels] = useState<ChannelInfo[]>([])
@@ -71,5 +71,5 @@ export function useVideoChannels() {
 
 // 获取视频流 URL
 export function getStreamUrl(channelId: string): string {
-  return `${API_BASE_URL}/channel/${channelId}/index.m3u8`
+  return `${API_BASE_URL}/${channelId}/index.m3u8`
 }
