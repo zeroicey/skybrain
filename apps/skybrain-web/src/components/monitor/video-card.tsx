@@ -2,10 +2,12 @@ import { Battery, MapPin, Maximize2, Video, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import type { Drone } from '@/types/drone'
+import { VideoPlayer } from './video-player'
 
 interface VideoCardProps {
   drone: Drone
   onFullscreen?: (drone: Drone) => void
+  streamUrl?: string
   className?: string
 }
 
@@ -15,20 +17,22 @@ const statusColors = {
   warning: 'bg-yellow-500',
 }
 
-export function VideoCard({ drone, onFullscreen, className }: VideoCardProps) {
+export function VideoCard({ drone, onFullscreen, streamUrl, className }: VideoCardProps) {
   return (
     <div className={cn('relative rounded-lg overflow-hidden border bg-card group', className)}>
       {/* 视频区域 */}
       <div className="aspect-video bg-muted flex items-center justify-center relative">
-        {drone.status !== 'offline' ? (
-          <div className="flex flex-col items-center gap-2 text-muted-foreground">
-            <Loader2 className="h-12 w-12 animate-spin" />
-            <span className="text-sm">视频流加载中...</span>
-          </div>
-        ) : (
+        {drone.status === 'offline' ? (
           <div className="flex flex-col items-center gap-2 text-muted-foreground/50">
             <Video className="h-12 w-12" />
             <span className="text-sm">离线</span>
+          </div>
+        ) : streamUrl ? (
+          <VideoPlayer streamUrl={streamUrl} />
+        ) : (
+          <div className="flex flex-col items-center gap-2 text-muted-foreground">
+            <Loader2 className="h-12 w-12 animate-spin" />
+            <span className="text-sm">视频流加载中...</span>
           </div>
         )}
 
