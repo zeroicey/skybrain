@@ -64,11 +64,13 @@ export default function BuildingPage() {
 
   // 初始化时随机获取视频
   useEffect(() => {
-    const channel = getRandomChannel('building')
-    if (channel) {
-      setStreamUrl(getStreamUrl(channel.id))
+    if (!videoLoading) {
+      const channel = getRandomChannel('building')
+      if (channel) {
+        setStreamUrl(getStreamUrl(channel.id))
+      }
     }
-  }, [])
+  }, [videoLoading])
 
   useEffect(() => { refreshAllData() }, [])
   useEffect(() => {

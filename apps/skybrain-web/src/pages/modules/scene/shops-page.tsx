@@ -64,11 +64,13 @@ export default function ShopsPage() {
 
   // 初始化时随机获取视频
   useEffect(() => {
-    const channel = getRandomChannel('street')
-    if (channel) {
-      setStreamUrl(getStreamUrl(channel.id))
+    if (!videoLoading) {
+      const channel = getRandomChannel('street')
+      if (channel) {
+        setStreamUrl(getStreamUrl(channel.id))
+      }
     }
-  }, [])
+  }, [videoLoading])
 
   useEffect(() => {
     refreshAllData()
