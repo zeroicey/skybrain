@@ -26,7 +26,7 @@ export default function MultiMonitorPage() {
 
       activeDrones.forEach((drone, index) => {
         if (randomChannels[index]) {
-          newMap.set(drone.id, getStreamUrl(randomChannels[index].id))
+          newMap.set(drone.id, getStreamUrl(randomChannels[index].id, channels))
         }
       })
 

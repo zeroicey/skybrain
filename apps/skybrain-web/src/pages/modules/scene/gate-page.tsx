@@ -19,7 +19,7 @@ import { generateIdentityDistribution, gateCameras } from '@/data/mock-gates'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { useVideoChannels, getStreamUrl } from '@/hooks/useVideoChannels'
+import { useVideoChannels, getStreamUrl, getFullUrl } from '@/hooks/useVideoChannels'
 import { VideoPlayer } from '@/components/monitor/video-player'
 
 const COLORS = {
@@ -60,7 +60,7 @@ export default function GatePage() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(true)
 
   // 视频流
-  const { getRandomChannel, loading: videoLoading } = useVideoChannels()
+  const { getRandomChannel, loading: videoLoading, channels } = useVideoChannels()
   const [streamUrl, setStreamUrl] = useState<string | null>(null)
 
   // 初始化时随机获取视频
@@ -68,7 +68,7 @@ export default function GatePage() {
     if (!videoLoading) {
       const channel = getRandomChannel('gate')
       if (channel) {
-        setStreamUrl(getStreamUrl(channel.id))
+        setStreamUrl(getFullUrl(channel.url))
       }
     }
   }, [videoLoading])

@@ -2,7 +2,7 @@ import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
 import ModuleLayout from "@/components/layout/module-layout";
 import RootLayout from "@/components/layout/root-layout";
-import LandingPage from "@/components/landing/landing-page";
+const LandingPage = lazy(() => import("@/pages/landing"));
 
 const NotFoundPage = lazy(() => import("@/pages/404"));
 const ErrorPage = lazy(() => import("@/pages/error"));
