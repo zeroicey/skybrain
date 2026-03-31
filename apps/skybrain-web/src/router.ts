@@ -33,6 +33,11 @@ const HangarsPage = lazy(() => import("@/pages/modules/device/hangars-page"));
 const BatteriesPage = lazy(() => import("@/pages/modules/device/batteries-page"));
 const MaintenancePage = lazy(() => import("@/pages/modules/device/maintenance-page"));
 
+const UsersPage = lazy(() => import("@/pages/modules/setting/users-page"));
+const RolesPage = lazy(() => import("@/pages/modules/setting/roles-page"));
+const LogsPage = lazy(() => import("@/pages/modules/setting/logs-page"));
+const ConfigPage = lazy(() => import("@/pages/modules/setting/config-page"));
+
 
 const router = createBrowserRouter([
     {
@@ -83,6 +88,15 @@ const router = createBrowserRouter([
                             { path: "hangars", Component: HangarsPage },
                             { path: "batteries", Component: BatteriesPage },
                             { path: "maintenance", Component: MaintenancePage },
+                        ]
+                    },
+                    {
+                        path: "settings",
+                        children: [
+                            { path: "users", Component: UsersPage },
+                            { path: "roles", Component: RolesPage },
+                            { path: "logs", Component: LogsPage },
+                            { path: "config", Component: ConfigPage },
                         ]
                     },
                 ],
