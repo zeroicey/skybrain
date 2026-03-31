@@ -133,9 +133,21 @@ func main() {
 	}
 	log.Println("================")
 
-	// 提供 videos 目录的静态文件
-	videosFS := http.FileServer(http.Dir("./videos"))
-	http.Handle("/videos/", corsMiddleware(videosFS))
+	// 提供 videos 目录的静态文件 - 使用绝对路径
+	absPath, _ := filepath.Abs("./videos")
+
+	// 直接用自定义 handler 来serve文件
+	http.HandleFunc("/videos/", func(w http.ResponseWriter, r *http.Request) {
+		// 添加 CORS 头
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Range, Content-Type")
+
+		// 去掉 /videos/ 前缀
+		relPath := strings.TrimPrefix(r.URL.Path, "/videos/")
+		filePath := filepath.Join(absPath, relPath)
+		http.ServeFile(w, r, filePath)
+	})
 
 	// 注册 /api/channels 接口
 	http.HandleFunc("/api/channels", handleChannels(baseURL))

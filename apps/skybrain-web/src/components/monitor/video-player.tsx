@@ -75,7 +75,6 @@ export function VideoPlayer({
           muted
           playsInline
           loop
-          controls
         />
       )}
 

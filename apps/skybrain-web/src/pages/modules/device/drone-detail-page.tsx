@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { ArrowLeft, Battery, MapPin, Settings } from 'lucide-react'
+import { Canvas } from '@react-three/fiber'
 import { useDeviceStore } from '@/stores/device-store'
 import { mockDeviceDrones } from '@/data/mock-device-drones'
+import { Model } from '@/components/landing/model'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -61,8 +63,12 @@ export default function DroneDetailPage() {
             <CardTitle>3D 模型展示</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-              <p className="text-muted-foreground">3D 模型加载区域</p>
+            <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+              <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+                <ambientLight intensity={0.5} />
+                <pointLight position={[10, 10, 10]} />
+                <Model scale={5} rotation={[0.2, 0, 0.1]} />
+              </Canvas>
             </div>
           </CardContent>
         </Card>

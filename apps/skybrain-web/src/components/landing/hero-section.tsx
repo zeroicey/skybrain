@@ -3,8 +3,9 @@
 import { Suspense, useEffect, useMemo, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import { Link } from 'react-router'
 import { Model } from './model'
-import { Eye, Zap, MapPin, Shield, Radar, Wind, Wifi } from 'lucide-react'
+import { Eye, Zap, MapPin, Shield, Radar, Wind, Wifi, ChevronDown, ArrowRight, Mouse } from 'lucide-react'
 
 
 function FloatingParticle({ delay = 0, top, left }: { delay?: number; top: number; left: number }) {
@@ -162,7 +163,7 @@ export default function HeroSection() {
             shadow-mapSize-height={1024}
           />
           <Suspense fallback={null}>
-            <Model position={[0, -0.06, 0]} scale={1.8} />
+            <Model position={[0, -0.06, 0]} rotation={[0.2, 0, 0.1]} scale={1.8} />
           </Suspense>
           <OrbitControls enablePan={false} enableZoom={false} autoRotate autoRotateSpeed={0.5} />
         </Canvas>
@@ -203,8 +204,17 @@ export default function HeroSection() {
         <div className="w-1/2 pl-8 md:pl-16 lg:pl-24 pr-8">
           {/* Main Headline */}
           <h1 className="">
+            {/* Status Bar */}
+            <div className="flex items-center gap-2 mb-4">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+              </span>
+              <span className="text-sm font-medium text-emerald-300 tracking-wide">智能校园无人机系统</span>
+            </div>
+
             <span
-              className="block text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none text-transparent bg-clip-text bg-[linear-gradient(120deg,#67e8f9_0%,#60a5fa_28%,#c084fc_54%,#fb7185_76%,#67e8f9_100%)] bg-[length:220%_220%]"
+              className="block text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none text-transparent bg-clip-text bg-[linear-gradient(120deg,#67e8f9_0%,#60a5fa_28%,#c084fc_54%,#fb7185_76%,#67e8_100%)] bg-[length:220%_220%]"
               style={{ animation: 'titleGradientShift 7s ease-in-out infinite' }}
             >
               天枢灵犀
@@ -223,7 +233,7 @@ export default function HeroSection() {
           </div>
 
           {/* Feature Pills */}
-          <div className="flex flex-wrap gap-3 mb-10">
+          <div className="flex flex-wrap gap-3 mb-6">
             {featurePills.map((pill) => {
               const Icon = pill.icon
               return (
@@ -236,6 +246,25 @@ export default function HeroSection() {
                 </div>
               )
             })}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4">
+            <Link
+              to="/monitor/multi"
+              className="group relative inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 px-8 py-4 text-base font-bold text-white shadow-lg transition-all duration-300 hover:from-sky-400 hover:to-blue-500 hover:shadow-sky-500/30 hover:scale-105"
+            >
+              <span>进入系统</span>
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <button
+              onClick={() => {
+                window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+              }}
+              className="group relative inline-flex items-center gap-3 rounded-full border-2 border-white/50 bg-transparent px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white/10"
+            >
+              <span>了解更多</span>
+            </button>
           </div>
         </div>
       </div>
@@ -258,6 +287,33 @@ export default function HeroSection() {
 
       {/* Bottom Gradient Fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+
+      {/* Scrolling Notice */}
+      <div className="absolute bottom-4 left-0 right-0 z-30">
+        <div className="overflow-hidden">
+          <div className="flex animate-marquee whitespace-nowrap justify-center">
+            <span className="mx-6 text-sm text-white/80">📢 系统公告：校园无人机巡检系统已上线试运行，欢迎各位老师同学提出宝贵意见！</span>
+            <span className="mx-6 text-sm text-amber-300">⚡ 今日任务：教学楼区域巡检已调度完成，预计 14:00 起飞</span>
+            <span className="mx-6 text-sm text-emerald-300">✅ 设备状态：8 架无人机在线，2 架正在进行充电</span>
+            <span className="mx-6 text-sm text-sky-300">🛸 新增功能：支持 3D 模型查看，点击无人机详情页即可体验</span>
+            <span className="mx-6 text-sm text-rose-300">🔧 维护提醒：无人机-03 需要进行例行维护，请及时处理</span>
+            <span className="mx-6 text-sm text-white/80">📢 系统公告：校园无人机巡检系统已上线试运行，欢迎各位老师同学提出宝贵意见！</span>
+            <span className="mx-6 text-sm text-amber-300">⚡ 今日任务：教学楼区域巡检已调度完成，预计 14:00 起飞</span>
+            <span className="mx-6 text-sm text-emerald-300">✅ 设备状态：8 架无人机在线，2 架正在进行充电</span>
+            <span className="mx-6 text-sm text-sky-300">🛸 新增功能：支持 3D 模型查看，点击无人机详情页即可体验</span>
+            <span className="mx-6 text-sm text-rose-300">🔧 维护提醒：无人机-03 需要进行例行维护，请及时处理</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll Hint */}
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-30 animate-bounce hidden md:block">
+        <div className="flex flex-col items-center gap-2 text-white/60">
+          <Mouse className="h-5 w-5" />
+          <span className="text-xs">向下滚动</span>
+          <ChevronDown className="h-4 w-4" />
+        </div>
+      </div>
 
       <style>{`
         @keyframes titleGradientShift {
@@ -284,6 +340,19 @@ export default function HeroSection() {
 
         .hero-orbit-card {
           animation: orbitFloat 5.8s ease-in-out infinite;
+        }
+
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .animate-marquee {
+          animation: marquee 20s linear infinite;
         }
       `}</style>
     </div>

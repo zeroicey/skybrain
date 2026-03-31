@@ -1,4 +1,4 @@
-import { Home, Video, ListTodo, Shield, Plane, BarChart, Settings, Bot, Users, User, Clock, Battery, Warehouse, Map, Ban, FileText, Mic, MessageSquare, FileEdit, Eye, Play, Grid3X3, Plus, Calendar, AlertTriangle, Siren, Drone, Gauge, ClipboardList, ScanEye, TrendingUp, Utensils, Building2, GraduationCap, DoorOpen, UsersRound } from "lucide-react"
+import { Home, Video, ListTodo, Plane, BarChart, Settings, Bot, Users, User, Clock, Battery, Warehouse, Map, FileText, Mic, MessageSquare, FileEdit, Eye, Play, Grid3X3, Plus, Calendar, Drone, ClipboardList, ScanEye, TrendingUp, Utensils, Building2, GraduationCap, DoorOpen, UsersRound } from "lucide-react"
 
 import {
   Sidebar,
@@ -59,16 +59,16 @@ const navItems = [
       { title: "任务日志", url: "/tasks/logs", icon: FileText },
     ],
   },
-  {
-    title: "校园安保",
-    url: "/security",
-    icon: Shield,
-    items: [
-      { title: "周界巡逻", url: "/security/patrol", icon: AlertTriangle },
-      { title: "入侵告警", url: "/security/intrusion", icon: Siren },
-      { title: "应急响应", url: "/security/emergency", icon: Settings },
-    ],
-  },
+  // {
+  //   title: "校园安保",
+  //   url: "/security",
+  //   icon: Shield,
+  //   items: [
+  //     { title: "周界巡逻", url: "/security/patrol", icon: AlertTriangle },
+  //     { title: "入侵告警", url: "/security/intrusion", icon: Siren },
+  //     { title: "应急响应", url: "/security/emergency", icon: Settings },
+  //   ],
+  // },
   {
     title: "设备管理",
     url: "/devices",
@@ -86,8 +86,8 @@ const navItems = [
     icon: Plane,
     items: [
       { title: "航线管理", url: "/flight/routes", icon: Map },
-      { title: "禁飞管理", url: "/flight/no-fly", icon: Ban },
-      { title: "实时监控", url: "/flight/monitor", icon: Gauge },
+      // { title: "禁飞管理", url: "/flight/no-fly", icon: Ban },
+      // { title: "实时监控", url: "/flight/monitor", icon: Gauge },
       { title: "飞行记录", url: "/flight/records", icon: FileText },
     ],
   },
@@ -121,10 +121,10 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       {/* Logo 区域 - 使用 SidebarHeader 确保在顶部 */}
       <SidebarHeader className="py-4">
-        <div className="flex items-center justify-center px-2 w-full">
+        <Link to="/" className="flex items-center justify-center px-2 w-full">
           <ScanEye className="h-6 w-6 shrink-0" />
           <span className="font-bold text-lg ml-2 group-data-[collapsible=icon]:hidden">SkyBrain</span>
-        </div>
+        </Link>
       </SidebarHeader>
 
       <SidebarContent>
