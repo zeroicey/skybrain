@@ -24,7 +24,7 @@ export default function DroneDetailPage() {
 
   if (!drone) {
     return (
-      <div className="container mx-auto py-6">
+      <div className="container mx-auto p-6">
         <p>无人机不存在</p>
         <Button onClick={() => navigate('/devices/drones')}>返回列表</Button>
       </div>

@@ -46,7 +46,7 @@ export default function BatteriesPage() {
   }
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
+    <div className="container mx-auto p-6 space-y-6">
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card>

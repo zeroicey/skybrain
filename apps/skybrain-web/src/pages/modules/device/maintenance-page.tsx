@@ -62,7 +62,7 @@ export default function MaintenancePage() {
   }
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
+    <div className="container mx-auto p-6 space-y-6">
       <div className="flex gap-4 flex-wrap">
         <Select value={deviceTypeFilter} onValueChange={setDeviceTypeFilter}>
           <SelectTrigger className="w-40">
