@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Plus, Search, Download } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useDeviceStore } from '@/stores/device-store'
 import { mockDeviceMaintenance } from '@/data/mock-device-maintenance'
 import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -64,19 +63,6 @@ export default function MaintenancePage() {
 
   return (
     <div className="container mx-auto py-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex gap-2">
-          <Button variant="outline">
-            <Download className="h-4 w-4 mr-2" />
-            导出
-          </Button>
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            添加记录
-          </Button>
-        </div>
-      </div>
-
       <div className="flex gap-4 flex-wrap">
         <Select value={deviceTypeFilter} onValueChange={setDeviceTypeFilter}>
           <SelectTrigger className="w-40">

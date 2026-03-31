@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { Download, Trash2, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useSettingStore } from '@/stores/setting-store'
 import { LogList } from '@/components/setting/log-list'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -17,11 +16,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { toast } from 'sonner'
 import type { Log } from '@/data/mock-settings'
 
 export default function LogsPage() {
-  const { logs, setLogs } = useSettingStore()
+  const { logs } = useSettingStore()
   const [search, setSearch] = useState('')
   const [operatorFilter, setOperatorFilter] = useState<string>('all')
   const [actionFilter, setActionFilter] = useState<string>('all')
@@ -37,32 +35,11 @@ export default function LogsPage() {
     return matchesSearch && matchesOperator && matchesAction && matchesStatus
   })
 
-  const handleExport = () => {
-    toast.success('日志导出成功')
-  }
-
-  const handleClear = () => {
-    setLogs([])
-    toast.success('日志已清空')
-  }
-
   const uniqueOperators = [...new Set(logs.map(l => l.operator))]
   const uniqueActions = [...new Set(logs.map(l => l.action))]
 
   return (
     <div className="container mx-auto py-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={handleExport}>
-            <Download className="h-4 w-4 mr-2" />
-            导出
-          </Button>
-          <Button variant="outline" className="text-red-600" onClick={handleClear}>
-            <Trash2 className="h-4 w-4 mr-2" />
-            清空
-          </Button>
-        </div>
-      </div>
 
       <div className="flex gap-4 flex-wrap">
         <Select value={operatorFilter} onValueChange={setOperatorFilter}>

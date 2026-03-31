@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Plus, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useDeviceStore } from '@/stores/device-store'
 import { mockDeviceDrones } from '@/data/mock-device-drones'
 import { DroneCard } from '@/components/device/drone-card'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -37,12 +36,6 @@ export default function DronesPage() {
 
   return (
     <div className="container mx-auto py-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          添加无人机
-        </Button>
-      </div>
 
       <div className="flex gap-4">
         <Select value={statusFilter} onValueChange={setStatusFilter}>

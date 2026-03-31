@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { Plus, Search, Upload, Download } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useSettingStore } from '@/stores/setting-store'
 import { UserTable } from '@/components/setting/user-table'
 import { UserFormDialog } from '@/components/setting/user-form-dialog'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -71,22 +70,6 @@ export default function UsersPage() {
 
   return (
     <div className="container mx-auto py-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex gap-2">
-          <Button variant="outline">
-            <Upload className="h-4 w-4 mr-2" />
-            批量导入
-          </Button>
-          <Button variant="outline">
-            <Download className="h-4 w-4 mr-2" />
-            导出
-          </Button>
-          <Button onClick={() => { setEditingUser(null); setDialogOpen(true) }}>
-            <Plus className="h-4 w-4 mr-2" />
-            添加用户
-          </Button>
-        </div>
-      </div>
 
       <div className="flex gap-4">
         <Select value={roleFilter} onValueChange={setRoleFilter}>

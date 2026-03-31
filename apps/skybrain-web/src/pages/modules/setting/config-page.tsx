@@ -1,28 +1,15 @@
 import { useState } from 'react'
-import { Save, RotateCcw } from 'lucide-react'
 import { useSettingStore } from '@/stores/setting-store'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { toast } from 'sonner'
 
 export default function ConfigPage() {
-  const { config, updateConfig } = useSettingStore()
+  const { config } = useSettingStore()
   const [localConfig, setLocalConfig] = useState(config)
   const [activeTab, setActiveTab] = useState('basic')
-
-  const handleSave = () => {
-    updateConfig(localConfig)
-    toast.success('配置已保存')
-  }
-
-  const handleReset = () => {
-    setLocalConfig(config)
-    toast.info('已恢复为保存的配置')
-  }
 
   const weatherOptions = ['大风', '暴雨', '雷电', '大雪', '大雾']
 
@@ -36,18 +23,6 @@ export default function ConfigPage() {
 
   return (
     <div className="container mx-auto py-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={handleReset}>
-            <RotateCcw className="h-4 w-4 mr-2" />
-            恢复默认
-          </Button>
-          <Button onClick={handleSave}>
-            <Save className="h-4 w-4 mr-2" />
-            保存配置
-          </Button>
-        </div>
-      </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>

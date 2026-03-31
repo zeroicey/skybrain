@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Plus, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useDeviceStore } from '@/stores/device-store'
 import { mockDeviceBatteries } from '@/data/mock-device-batteries'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -48,12 +47,6 @@ export default function BatteriesPage() {
 
   return (
     <div className="container mx-auto py-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          添加电池
-        </Button>
-      </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card>

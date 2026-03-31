@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Plus } from 'lucide-react'
 import { useSettingStore } from '@/stores/setting-store'
 import { RoleList } from '@/components/setting/role-list'
 import { Button } from '@/components/ui/button'
@@ -70,12 +69,6 @@ export default function RolesPage() {
 
   return (
     <div className="container mx-auto py-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <Button onClick={() => { setEditingRole(null); setDialogOpen(true) }}>
-          <Plus className="h-4 w-4 mr-2" />
-          添加角色
-        </Button>
-      </div>
 
       <RoleList
         roles={roles}

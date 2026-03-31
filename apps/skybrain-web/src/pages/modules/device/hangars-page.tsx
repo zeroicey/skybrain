@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Plus, Thermometer, Droplets } from 'lucide-react'
+import { Thermometer, Droplets } from 'lucide-react'
 import { useDeviceStore } from '@/stores/device-store'
 import { mockDeviceHangars } from '@/data/mock-device-hangars'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -29,12 +29,6 @@ export default function HangarsPage() {
 
   return (
     <div className="container mx-auto py-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          添加机库
-        </Button>
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {hangars.map(hangar => {
