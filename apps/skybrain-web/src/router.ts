@@ -27,6 +27,12 @@ const DormitoryPage = lazy(() => import("@/pages/modules/scene/dormitory-page"))
 const BuildingPage = lazy(() => import("@/pages/modules/scene/building-page"));
 const GatePage = lazy(() => import("@/pages/modules/scene/gate-page"));
 
+const DronesPage = lazy(() => import("@/pages/modules/device/drones-page"));
+const DroneDetailPage = lazy(() => import("@/pages/modules/device/drone-detail-page"));
+const HangarsPage = lazy(() => import("@/pages/modules/device/hangars-page"));
+const BatteriesPage = lazy(() => import("@/pages/modules/device/batteries-page"));
+const MaintenancePage = lazy(() => import("@/pages/modules/device/maintenance-page"));
+
 
 const router = createBrowserRouter([
     {
@@ -67,6 +73,16 @@ const router = createBrowserRouter([
                             { path: "dormitory", Component: DormitoryPage },
                             { path: "building", Component: BuildingPage },
                             { path: "gate", Component: GatePage },
+                        ]
+                    },
+                    {
+                        path: "devices",
+                        children: [
+                            { path: "drones", Component: DronesPage },
+                            { path: "drones/:id", Component: DroneDetailPage },
+                            { path: "hangars", Component: HangarsPage },
+                            { path: "batteries", Component: BatteriesPage },
+                            { path: "maintenance", Component: MaintenancePage },
                         ]
                     },
                 ],
