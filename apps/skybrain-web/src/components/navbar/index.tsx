@@ -15,6 +15,15 @@ import ShopNav from "./contents/shop";
 import DormitoryNav from "./contents/dormitory";
 import BuildingNav from "./contents/building";
 import GateNav from "./contents/gate";
+import DronesNav from "./contents/device-drones";
+import DroneDetailNav from "./contents/device-drone-detail";
+import HangarsNav from "./contents/device-hangars";
+import BatteriesNav from "./contents/device-batteries";
+import MaintenanceNav from "./contents/device-maintenance";
+import UsersNav from "./contents/settings-users";
+import RolesNav from "./contents/settings-roles";
+import LogsNav from "./contents/settings-logs";
+import ConfigNav from "./contents/settings-config";
 
 const rightContents = new Map<string, React.ReactNode>([
   ["/monitor/live", <MonitorLiveNav key="monitor-live" />],
@@ -29,6 +38,16 @@ const rightContents = new Map<string, React.ReactNode>([
   ["/tasks/create", <TaskCreateNav key="tasks-create" />],
   ["/tasks/schedule", <TaskScheduleNav key="tasks-schedule" />],
   ["/tasks/logs", <TaskLogsNav key="tasks-logs" />],
+  // Device module
+  ["/devices/drones", <DronesNav key="devices-drones" />],
+  ["/devices/hangars", <HangarsNav key="devices-hangars" />],
+  ["/devices/batteries", <BatteriesNav key="devices-batteries" />],
+  ["/devices/maintenance", <MaintenanceNav key="devices-maintenance" />],
+  // Settings module
+  ["/settings/users", <UsersNav key="settings-users" />],
+  ["/settings/roles", <RolesNav key="settings-roles" />],
+  ["/settings/logs", <LogsNav key="settings-logs" />],
+  ["/settings/config", <ConfigNav key="settings-config" />],
 ]);
 
 // 动态匹配 /tasks/:id 和 /tasks/:id/edit
@@ -42,10 +61,19 @@ const getTaskNav = (pathname: string) => {
   return null
 }
 
+// 动态匹配 /devices/drones/:id
+const getDeviceNav = (pathname: string) => {
+  if (pathname.match(/^\/devices\/drones\/[^/]+$/)) {
+    return <DroneDetailNav key="devices-drone-detail" />
+  }
+  return null
+}
+
 export default function Navbar() {
   const location = useLocation();
   const taskNav = getTaskNav(location.pathname)
-  const content = rightContents.get(location.pathname) || taskNav
+  const deviceNav = getDeviceNav(location.pathname)
+  const content = rightContents.get(location.pathname) || taskNav || deviceNav
 
   return (
     <header className="flex items-center border-b px-4 py-4 gap-2 h-16">
