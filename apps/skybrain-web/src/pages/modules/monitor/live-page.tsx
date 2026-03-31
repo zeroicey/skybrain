@@ -7,6 +7,7 @@ import { DroneInfoPanel } from '@/components/monitor/drone-info-panel'
 import { mockDrones } from '@/data/mock-drones'
 import { Button } from '@/components/ui/button'
 import type { VideoQuality } from '@/types/drone'
+import { useVideoChannels, getStreamUrl } from '@/hooks/useVideoChannels'
 
 const qualities: VideoQuality[] = ['流畅', '高清', '4K']
 
@@ -19,7 +20,37 @@ export default function LivePage() {
   const [isMuted, setIsMuted] = useState(false)
   const [quality, setQuality] = useState<string>('流畅')
 
+  // 直接使用 mockDrones
   const selectedDrone = mockDrones.find(d => d.id === selectedDroneId)
+
+  // 获取视频频道
+  const { loading: channelsLoading, channels } = useVideoChannels()
+
+  // 根据无人机索引获取对应的视频流
+  const [streamUrl, setStreamUrl] = useState<string | null>(null)
+
+  // 当 channels 加载完成后，设置对应的视频流
+  useEffect(() => {
+    if (channelsLoading || channels.length === 0) {
+      return
+    }
+
+    if (!selectedDrone) {
+      setStreamUrl(null)
+      return
+    }
+
+    // 获取所有在线无人机
+    const onlineDrones = mockDrones.filter(d => d.status !== 'offline')
+    const droneIndex = onlineDrones.findIndex(d => d.id === selectedDroneId)
+
+    // 直接使用 channels 数组中对应索引的 channel
+    if (droneIndex >= 0 && channels[droneIndex]) {
+      setStreamUrl(getStreamUrl(channels[droneIndex].id, channels))
+    } else if (channels.length > 0) {
+      setStreamUrl(getStreamUrl(channels[0].id, channels))
+    }
+  }, [selectedDroneId, channelsLoading, channels])
 
   // 模拟播放时间递增
   useEffect(() => {
@@ -71,7 +102,8 @@ export default function LivePage() {
       <div className="flex-1 p-6 overflow-auto h-full no-scrollbar">
         <div className="max-w-4xl mx-auto">
           <VideoPlayer
-            isLoading={!!selectedDrone && selectedDrone.status !== 'offline'}
+            streamUrl={streamUrl}
+            isLoading={channelsLoading || !streamUrl}
             isOffline={selectedDrone?.status === 'offline'}
           />
 

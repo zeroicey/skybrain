@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
 import { VideoGrid } from '@/components/monitor/video-grid'
 import { useMonitorStore } from '@/stores/monitor-store'
 import type { Drone } from '@/types/drone'
@@ -6,6 +7,7 @@ import { mockDrones } from '@/data/mock-drones'
 import { useVideoChannels, getStreamUrl } from '@/hooks/useVideoChannels'
 
 export default function MultiMonitorPage() {
+  const navigate = useNavigate()
   const { activeDrones, setDroneState } = useMonitorStore()
   const { getRandomChannels, loading, channels } = useVideoChannels()
   const [droneVideoMap, setDroneVideoMap] = useState<Map<string, string>>(new Map())
@@ -37,7 +39,7 @@ export default function MultiMonitorPage() {
   const drones = activeDrones.filter(d => d.status !== 'offline')
 
   const handleFullscreen = (drone: Drone) => {
-    console.log('进入全屏:', drone.name)
+    navigate(`/monitor/live?drone=${drone.id}`)
   }
 
   return (
