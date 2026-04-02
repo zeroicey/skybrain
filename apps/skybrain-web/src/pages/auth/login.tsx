@@ -49,7 +49,8 @@ export default function LoginPage() {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      handleSubmit(e)
+      e.preventDefault()
+      handleSubmit(e as unknown as React.FormEvent)
     }
   }
 
@@ -83,11 +84,13 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* 用户名 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1.5">
                   用户名
                 </label>
                 <input
+                  id="username"
                   type="text"
+                  autoComplete="username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   onKeyDown={handleKeyDown}
@@ -98,12 +101,14 @@ export default function LoginPage() {
 
               {/* 密码 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1.5">
                   密码
                 </label>
                 <div className="relative">
                   <input
+                    id="password"
                     type={showPassword ? 'text' : 'password'}
+                    autoComplete="current-password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     onKeyDown={handleKeyDown}
@@ -114,6 +119,7 @@ export default function LoginPage() {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    aria-label={showPassword ? '隐藏密码' : '显示密码'}
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
@@ -138,7 +144,7 @@ export default function LoginPage() {
 
               {/* 错误提示 */}
               {error && (
-                <div className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded-lg">
+                <div role="alert" className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded-lg">
                   {error}
                 </div>
               )}
