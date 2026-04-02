@@ -8,7 +8,6 @@ const NotFoundPage = lazy(() => import("@/pages/404"));
 const ErrorPage = lazy(() => import("@/pages/error"));
 
 const LoginPage = lazy(() => import("@/pages/auth/login"));
-const RegisterPage = lazy(() => import("@/pages/auth/register"));
 
 const MultiMonitorPage = lazy(() => import("@/pages/modules/monitor/multi-monitor-page"));
 const MonitorLivePage = lazy(() => import("@/pages/modules/monitor/live-page"));
@@ -47,7 +46,6 @@ const router = createBrowserRouter([
         children: [
             { index: true, Component: LandingPage },
             { path: "login", Component: LoginPage },
-            { path: "register", Component: RegisterPage },
             {
                 Component: ModuleLayout,
                 children: [
