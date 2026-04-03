@@ -7,7 +7,7 @@ export interface ChannelInfo {
     url: string  // 视频文件完整 URL
 }
 
-const API_BASE_URL = 'http://100.101.157.4:8889'
+const API_BASE_URL = 'http://10.66.0.3:8889'
 
 export function useVideoChannels() {
     const [channels, setChannels] = useState<ChannelInfo[]>([])
