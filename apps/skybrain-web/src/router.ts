@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router";
 import ModuleLayout from "@/components/layout/module-layout";
 import RootLayout from "@/components/layout/root-layout";
 const LandingPage = lazy(() => import("@/pages/landing"));
+const DashboardPage = lazy(() => import("@/pages/modules/dashboard/dashboard-page"));
 
 const NotFoundPage = lazy(() => import("@/pages/404"));
 const ErrorPage = lazy(() => import("@/pages/error"));
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
         ErrorBoundary: ErrorPage,
         children: [
             { index: true, Component: LandingPage },
+            { path: "dashboard", Component: DashboardPage },
             { path: "login", Component: LoginPage },
             {
                 Component: ModuleLayout,
