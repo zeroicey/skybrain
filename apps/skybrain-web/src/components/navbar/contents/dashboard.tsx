@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ScanEye, RefreshCw } from 'lucide-react'
+import { RefreshCw } from 'lucide-react'
 
 export default function DashboardNav() {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -17,7 +17,7 @@ export default function DashboardNav() {
   return (
     <div className="w-full flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <ScanEye className="h-6 w-6 text-sky-500" />
+        <img src="/logo.svg" alt="SkyBrain" className="h-6 w-6" />
         <div>
           <h1 className="text-xl font-bold">SkyBrain 终端</h1>
           <p className="text-xs text-zinc-400">智能无人机管理系统</p>

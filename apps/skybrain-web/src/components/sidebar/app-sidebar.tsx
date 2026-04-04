@@ -1,4 +1,4 @@
-import { Home, Video, ListTodo, Plane, Settings, Bot, Users, User, Clock, Battery, Warehouse, Map, FileText, Mic, MessageSquare, FileEdit, Eye, Play, Grid3X3, Plus, Calendar, Drone, ClipboardList, ScanEye, TrendingUp, Utensils, Building2, GraduationCap, DoorOpen, UsersRound } from "lucide-react"
+import { Home, Video, ListTodo, Plane, Settings, Bot, Users, User, Clock, Battery, Warehouse, Map, FileText, Mic, MessageSquare, FileEdit, Eye, Play, Grid3X3, Plus, Calendar, Drone, ClipboardList, TrendingUp, Utensils, Building2, GraduationCap, DoorOpen, UsersRound } from "lucide-react"
 
 import {
   Sidebar,
@@ -121,7 +121,7 @@ export function AppSidebar() {
       {/* Logo 区域 - 使用 SidebarHeader 确保在顶部 */}
       <SidebarHeader className="py-4">
         <Link to="/" className="flex items-center justify-center px-2 w-full">
-          <ScanEye className="h-6 w-6 shrink-0" />
+          <img src="/logo.svg" alt="SkyBrain" className="h-6 w-6 shrink-0" />
           <span className="font-bold text-lg ml-2 group-data-[collapsible=icon]:hidden">SkyBrain</span>
         </Link>
       </SidebarHeader>
