@@ -41,7 +41,7 @@ export function DroneListCard({ drones }: DroneListCardProps) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-2 max-h-64 overflow-y-auto">
+        <div className="space-y-2 max-h-64 overflow-y-auto no-scrollbar">
           {sortedDrones.map(drone => (
             <div
               key={drone.id}

@@ -60,18 +60,18 @@ export default function DashboardPage() {
   const todayDistance = 28.5
 
   return (
-    <div className="container mx-auto p-6 space-y-6 no-scrollbar overflow-auto h-full">
-      {/* 第一行：4个状态卡片 - 使用 auto-fit 让卡片自适应内容 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="container mx-auto p-6 space-y-6 h-full overflow-auto no-scrollbar">
+      {/* 第一行：4个状态卡片 */}
+      <div className="grid grid-cols-4 gap-4">
         <DroneStatusCard drones={mockDrones} />
         <TaskOverviewCard tasks={mockTasks} />
         <BatteryStatusCard batteries={mockDeviceBatteries} />
         <AlertList logs={mockTaskLogs} />
       </div>
 
-      {/* 第二行：飞行统计(宽) + 任务统计 + 设备健康 */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="md:col-span-2">
+      {/* 第二行：飞行统计 + 任务统计 */}
+      <div className="grid grid-cols-4 gap-4">
+        <div className="col-span-2">
           <FlightStatsCard
             todayFlightMinutes={todayFlightMinutes}
             todayTasks={todayTasks}
@@ -80,20 +80,14 @@ export default function DashboardPage() {
           />
         </div>
         <TaskStatsCard tasks={mockTasks} />
+        <EquipmentHealthCard batteries={mockDeviceBatteries} />
       </div>
 
-      {/* 设备健康单独一行 */}
-      <EquipmentHealthCard batteries={mockDeviceBatteries} />
-
       {/* 第三行：无人机列表 + 活动 timeline + 视频Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="lg:col-span-1 no-scrollbar overflow-auto" style={{ maxHeight: '400px' }}>
-          <DroneListCard drones={mockDrones} />
-        </div>
-        <div className="lg:col-span-1 no-scrollbar overflow-auto" style={{ maxHeight: '400px' }}>
-          <ActivityTimeline logs={mockTaskLogs} />
-        </div>
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-4 gap-4">
+        <DroneListCard drones={mockDrones} />
+        <ActivityTimeline logs={mockTaskLogs} />
+        <div className="col-span-2">
           <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
             实时监控
             <span className="text-sm font-normal text-zinc-400">
