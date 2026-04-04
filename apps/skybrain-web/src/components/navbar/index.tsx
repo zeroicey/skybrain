@@ -80,8 +80,9 @@ export default function Navbar() {
   const content = rightContents.get(location.pathname) || taskNav || deviceNav
 
   return (
-    <header className="flex items-center px-4 pt-4 gap-2 h-16">
+    <header className="flex items-center border-b px-4 py-4 gap-2 h-16">
       <SidebarTrigger />
+      <Separator orientation="vertical" className="mr-2" />
       {content}
     </header>
   );

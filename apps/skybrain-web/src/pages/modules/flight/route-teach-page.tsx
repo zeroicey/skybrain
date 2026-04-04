@@ -21,7 +21,7 @@ const sceneOptions = [
 // - 'success': 模拟自检成功
 // - 'fail': 模拟自检失败
 // - 'timeout': 模拟连接超时
-const DEBUG_SELF_CHECK_MODE: 'success' | 'fail' | 'timeout' = 'success'
+const DEBUG_SELF_CHECK_MODE = 'success' as 'success' | 'fail' | 'timeout'
 // ======================================
 
 // 自检成功日志
