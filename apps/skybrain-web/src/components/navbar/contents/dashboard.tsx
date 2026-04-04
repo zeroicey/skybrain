@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 import { ScanEye, RefreshCw } from 'lucide-react'
-import { useDashboardStore } from '@/stores/dashboard-store'
 
 export default function DashboardNav() {
   const [currentTime, setCurrentTime] = useState(new Date())
-  const { setDroneVideoMap } = useDashboardStore()
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000)
@@ -12,8 +10,8 @@ export default function DashboardNav() {
   }, [])
 
   const handleRefresh = () => {
-    // 刷新时清空视频映射，让它重新分配
-    setDroneVideoMap(new Map())
+    // 刷新页面重新加载
+    window.location.reload()
   }
 
   return (

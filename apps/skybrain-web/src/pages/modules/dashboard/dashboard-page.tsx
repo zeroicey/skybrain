@@ -23,6 +23,9 @@ export default function DashboardPage() {
   useEffect(() => {
     if (channelsLoading || channels.length === 0) return
 
+    // 如果已经有视频流了，就不重新分配
+    if (droneVideoMap.size > 0) return
+
     const newMap = new Map<string, string>()
 
     // 随机打乱 channels 并分配给在线无人机
@@ -38,7 +41,8 @@ export default function DashboardPage() {
     })
 
     setDroneVideoMap(newMap)
-  }, [channelsLoading, channels, onlineDronesList, setDroneVideoMap])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [channelsLoading, channels.length]) // Only run when channels load
 
   // 计算统计数据
   const onlineDrones = mockDrones.filter(d => d.status === 'online').length
