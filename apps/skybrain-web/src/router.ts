@@ -50,11 +50,11 @@ const router = createBrowserRouter([
         ErrorBoundary: ErrorPage,
         children: [
             { index: true, Component: LandingPage },
-            { path: "dashboard", Component: DashboardPage },
             { path: "login", Component: LoginPage },
             {
                 Component: ModuleLayout,
                 children: [
+                    { path: "dashboard", Component: DashboardPage },
                     {
                         path: "monitor",
                         children: [
