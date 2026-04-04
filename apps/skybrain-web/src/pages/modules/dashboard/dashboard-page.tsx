@@ -7,6 +7,10 @@ import { BatteryStatusCard } from '@/components/dashboard/battery-status-card'
 import { AlertList } from '@/components/dashboard/alert-list'
 import { FlightStatsCard } from '@/components/dashboard/flight-stats-card'
 import { VideoGrid } from '@/components/dashboard/video-grid'
+import { DroneListCard } from '@/components/dashboard/drone-list-card'
+import { TaskStatsCard } from '@/components/dashboard/task-stats-card'
+import { EquipmentHealthCard } from '@/components/dashboard/equipment-health-card'
+import { ActivityTimeline } from '@/components/dashboard/activity-timeline'
 
 import { mockDrones } from '@/data/mock-drones'
 import { mockTasks, mockTaskLogs } from '@/data/mock-tasks'
@@ -57,7 +61,7 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      {/* 状态卡片行 */}
+      {/* 第一行：4个状态卡片 */}
       <div className="grid grid-cols-4 gap-4">
         <DroneStatusCard drones={mockDrones} />
         <TaskOverviewCard tasks={mockTasks} />
@@ -65,27 +69,37 @@ export default function DashboardPage() {
         <AlertList logs={mockTaskLogs} />
       </div>
 
-      {/* 飞行统计 */}
-      <FlightStatsCard
-        todayFlightMinutes={todayFlightMinutes}
-        todayTasks={todayTasks}
-        todayDistance={todayDistance}
-        successRate={successRate}
-      />
+      {/* 第二行：飞行统计 + 任务统计 */}
+      <div className="grid grid-cols-4 gap-4">
+        <div className="col-span-2">
+          <FlightStatsCard
+            todayFlightMinutes={todayFlightMinutes}
+            todayTasks={todayTasks}
+            todayDistance={todayDistance}
+            successRate={successRate}
+          />
+        </div>
+        <TaskStatsCard tasks={mockTasks} />
+        <EquipmentHealthCard batteries={mockDeviceBatteries} />
+      </div>
 
-      {/* 实时监控视频Grid */}
-      <div>
-        <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          实时监控
-          <span className="text-sm font-normal text-zinc-400">
-            ({onlineDrones} 架在线)
-          </span>
-        </h2>
-        <VideoGrid
-          drones={onlineDronesList}
-          videoMap={droneVideoMap}
-          isLoading={channelsLoading}
-        />
+      {/* 第三行：无人机列表 + 活动 timeline + 视频Grid */}
+      <div className="grid grid-cols-4 gap-4">
+        <DroneListCard drones={mockDrones} />
+        <ActivityTimeline logs={mockTaskLogs} />
+        <div className="col-span-2">
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            实时监控
+            <span className="text-sm font-normal text-zinc-400">
+              ({onlineDrones} 架在线)
+            </span>
+          </h2>
+          <VideoGrid
+            drones={onlineDronesList}
+            videoMap={droneVideoMap}
+            isLoading={channelsLoading}
+          />
+        </div>
       </div>
     </div>
   )
