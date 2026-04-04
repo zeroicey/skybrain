@@ -397,13 +397,18 @@ export default function RouteTeachPage() {
             {/* 状态指示器 */}
             <div className="flex items-center justify-center gap-2 flex-wrap">
               {/* 阶段指示 */}
-              <Badge variant={flowPhase === 'idle' ? 'secondary' : 'default'} className="gap-1">
+              <Badge
+                variant={flowPhase === 'idle' ? 'secondary' : flowPhase === 'self-check-fail' || flowPhase === 'self-check-timeout' ? 'destructive' : 'default'}
+                className="gap-1"
+              >
                 {flowPhase === 'idle' && '等待连接'}
                 {flowPhase === 'self-check' && <><Zap className="h-3 w-3" /> 自检中...</>}
                 {flowPhase === 'ready' && <><Wifi className="h-3 w-3" /> 就绪</>}
                 {flowPhase === 'recording' && <><Camera className="h-3 w-3" /> 录制中</>}
                 {flowPhase === 'paused' && '已暂停'}
                 {flowPhase === 'completed' && '已完成'}
+                {flowPhase === 'self-check-fail' && '❌ 自检失败'}
+                {flowPhase === 'self-check-timeout' && '⏱️ 连接超时'}
               </Badge>
 
               {/* 计时器 */}
@@ -434,6 +439,20 @@ export default function RouteTeachPage() {
                 <div className="flex items-center gap-2 text-yellow-500">
                   <span className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" />
                   <span>系统自检中，请稍候...</span>
+                </div>
+              )}
+
+              {/* 自检失败 - 显示错误和重试按钮 */}
+              {(flowPhase === 'self-check-fail' || flowPhase === 'self-check-timeout') && (
+                <div className="flex flex-col items-center gap-3">
+                  <div className="flex items-center gap-2 text-red-500">
+                    <span>{flowPhase === 'self-check-timeout' ? '⏱️' : '❌'}</span>
+                    <span>{flowPhase === 'self-check-timeout' ? '连接超时' : '自检失败'}</span>
+                  </div>
+                  <Button size="lg" variant="outline" onClick={handleStartSelfCheck} className="gap-2">
+                    <RotateCcw className="h-5 w-5" />
+                    重新连接
+                  </Button>
                 </div>
               )}
 
@@ -496,6 +515,8 @@ export default function RouteTeachPage() {
               {flowPhase === 'recording' && '正在录制飞行轨迹，请操控无人机按预定路线飞行'}
               {flowPhase === 'paused' && '录制已暂停，可以继续或停止'}
               {flowPhase === 'completed' && '录制完成，可以保存或重新录制'}
+              {flowPhase === 'self-check-fail' && '自检未通过，请检查设备连接后重试'}
+              {flowPhase === 'self-check-timeout' && '连接超时，请检查网络或设备后重试'}
             </div>
           </CardContent>
         </Card>

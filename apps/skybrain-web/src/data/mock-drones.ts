@@ -72,5 +72,15 @@ export const mockDrones: Drone[] = [
         battery: 92,
         altitude: 115,
         streamUrl: '/videos/sample9.mp4'
+    },
+    // 真实无人机 - Jetson 实时视频流
+    {
+        id: '10',
+        name: '无人机-10',
+        status: 'online',
+        battery: 100,
+        altitude: 50,
+        streamUrl: 'http://10.66.0.5:5000',
+        isMjpg: true
     }
 ]
