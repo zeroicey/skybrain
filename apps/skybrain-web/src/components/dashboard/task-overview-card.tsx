@@ -10,12 +10,12 @@ const PRIORITY_COLORS: Record<string, string> = {
   urgent: 'text-red-500',
   high: 'text-yellow-500',
   normal: 'text-blue-500',
-  low: 'text-zinc-500'
+  low: 'text-muted-foreground'
 }
 
 const STATUS_COLORS: Record<string, string> = {
   running: 'text-blue-500',
-  pending: 'text-zinc-400',
+  pending: 'text-muted-foreground',
   completed: 'text-green-500',
   failed: 'text-red-500',
   cancelled: 'text-zinc-600'
@@ -43,30 +43,30 @@ export function TaskOverviewCard({ tasks }: TaskOverviewCardProps) {
     .slice(0, 6)
 
   return (
-    <Card className="bg-zinc-900 border-zinc-800">
+    <Card className="bg-card border-border max-h-75 h-full">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-medium flex items-center gap-2">
           <ListTodo className="h-4 w-4" />
           任务概览
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="overflow-y-auto no-scrollbar">
         <div className="grid grid-cols-3 gap-4 mb-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-blue-500">{runningCount}</div>
-            <div className="text-xs text-zinc-400">进行中</div>
+            <div className="text-xs text-muted-foreground">进行中</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-zinc-300">{pendingCount}</div>
-            <div className="text-xs text-zinc-400">待执行</div>
+            <div className="text-2xl font-bold text-foreground">{pendingCount}</div>
+            <div className="text-xs text-muted-foreground">待执行</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-green-500">{completedToday}</div>
-            <div className="text-xs text-zinc-400">今日完成</div>
+            <div className="text-xs text-muted-foreground">今日完成</div>
           </div>
         </div>
         <div className="flex justify-between items-center text-xs mb-4">
-          <span className="text-zinc-400">失败/取消: {failedCount}</span>
+          <span className="text-muted-foreground">失败/取消: {failedCount}</span>
           <span className={successRate >= 80 ? 'text-green-500' : 'text-yellow-500'}>
             成功率: {successRate}%
           </span>
@@ -74,15 +74,15 @@ export function TaskOverviewCard({ tasks }: TaskOverviewCardProps) {
 
         {/* 最近任务 */}
         <div className="mt-2">
-          <div className="text-xs text-zinc-400 mb-2">最近任务</div>
-          <div className="space-y-1 max-h-48 overflow-y-auto no-scrollbar">
+          <div className="text-xs text-muted-foreground mb-2">最近任务</div>
+          <div className="space-y-1">
             {recentTasks.map(task => (
-              <div key={task.id} className="flex items-center justify-between text-xs p-1.5 bg-zinc-800/50 rounded">
+              <div key={task.id} className="flex items-center justify-between text-xs p-1.5 bg-muted/50 rounded">
                 <div className="flex items-center gap-2 min-w-0">
                   {task.status === 'running' && <Play className="h-3 w-3 text-blue-500 shrink-0" />}
                   {task.status === 'completed' && <CheckCircle className="h-3 w-3 text-green-500 shrink-0" />}
                   {task.status === 'failed' && <AlertCircle className="h-3 w-3 text-red-500 shrink-0" />}
-                  {task.status === 'pending' && <Clock className="h-3 w-3 text-zinc-500 shrink-0" />}
+                  {task.status === 'pending' && <Clock className="h-3 w-3 text-muted-foreground shrink-0" />}
                   <span className="truncate">{task.name}</span>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">

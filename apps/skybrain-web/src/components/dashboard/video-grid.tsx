@@ -31,14 +31,14 @@ export function VideoGrid({ drones, videoMap, isLoading, onVideoClick }: VideoGr
         return (
           <Card
             key={drone.id}
-            className="bg-zinc-900 border-zinc-800 cursor-pointer hover:border-zinc-600 transition-colors"
+            className="bg-card border-border cursor-pointer hover:border-primary transition-colors"
             onClick={() => onVideoClick?.(drone)}
           >
             <CardContent className="p-0">
               {/* 视频区域 */}
-              <div className="aspect-video bg-zinc-800 flex items-center justify-center relative">
+              <div className="aspect-video bg-muted flex items-center justify-center relative">
                 {isLoading ? (
-                  <Loader2 className="h-8 w-8 animate-spin text-zinc-500" />
+                  <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
                 ) : streamUrl ? (
                   drone.isMjpg ? (
                     <img
@@ -65,7 +65,7 @@ export function VideoGrid({ drones, videoMap, isLoading, onVideoClick }: VideoGr
               {/* 底部信息 */}
               <div className="p-3 flex justify-between items-center">
                 <div className="text-sm font-medium">{drone.name}</div>
-                <div className="text-xs text-zinc-400">
+                <div className="text-xs text-muted-foreground">
                   🔋 {drone.battery}%
                 </div>
               </div>

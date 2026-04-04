@@ -38,36 +38,36 @@ export function AlertList({ logs }: AlertListProps) {
     .slice(0, 5)
 
   return (
-    <Card className="bg-zinc-900 border-zinc-800">
+    <Card className="bg-card border-border max-h-75 h-full">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-medium flex items-center justify-between">
           <span className="flex items-center gap-2">
             <AlertTriangle className="h-4 w-4" />
             实时告警
           </span>
-          <span className="text-xs text-zinc-500 cursor-pointer hover:text-zinc-300">
+          <span className="text-xs text-muted-foreground cursor-pointer hover:text-zinc-300">
             全部 →
           </span>
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-3 max-h-56 overflow-y-auto no-scrollbar">
+      <CardContent className="overflow-y-auto no-scrollbar">
+        <div className="space-y-3">
           {alertLogs.map(log => (
             <div key={log.id} className="flex items-start gap-3 text-xs">
               {getAlertIcon(log.event)}
               <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-center">
                   <span className="font-medium truncate">{log.droneName || log.taskName}</span>
-                  <span className="text-zinc-500 whitespace-nowrap ml-2">
+                  <span className="text-muted-foreground whitespace-nowrap ml-2">
                     {formatAlertTime(log.timestamp)}
                   </span>
                 </div>
-                <div className="text-zinc-400 truncate">{log.message}</div>
+                <div className="text-muted-foreground truncate">{log.message}</div>
               </div>
             </div>
           ))}
           {alertLogs.length === 0 && (
-            <div className="text-center text-zinc-500 py-4 text-xs">
+            <div className="text-center text-muted-foreground py-4 text-xs">
               暂无告警
             </div>
           )}

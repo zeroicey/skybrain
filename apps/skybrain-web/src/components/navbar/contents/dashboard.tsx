@@ -16,13 +16,7 @@ export default function DashboardNav() {
 
   return (
     <div className="w-full flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <img src="/logo.svg" alt="SkyBrain" className="h-6 w-6" />
-        <div>
-          <h1 className="text-xl font-bold">SkyBrain 终端</h1>
-          <p className="text-xs text-zinc-400">智能无人机管理系统</p>
-        </div>
-      </div>
+      <div className="text-xl font-bold">仪表盘</div>
       <div className="flex items-center gap-4">
         <div className="text-right">
           <div className="text-xs text-zinc-400">

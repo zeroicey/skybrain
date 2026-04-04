@@ -25,6 +25,7 @@ import RolesNav from "./contents/settings-roles";
 import LogsNav from "./contents/settings-logs";
 import ConfigNav from "./contents/settings-config";
 import DashboardNav from "./contents/dashboard";
+import FlightRoutesNav from "./contents/flight-routes";
 
 const rightContents = new Map<string, React.ReactNode>([
   ["/dashboard", <DashboardNav key="dashboard" />],
@@ -50,6 +51,7 @@ const rightContents = new Map<string, React.ReactNode>([
   ["/settings/roles", <RolesNav key="settings-roles" />],
   ["/settings/logs", <LogsNav key="settings-logs" />],
   ["/settings/config", <ConfigNav key="settings-config" />],
+  ["/flight/routes", <FlightRoutesNav key="flight-routes" />],
 ]);
 
 // 动态匹配 /tasks/:id 和 /tasks/:id/edit

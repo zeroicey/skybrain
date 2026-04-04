@@ -15,7 +15,7 @@ function getStatusColor(status: string) {
     case 'offline':
       return 'text-red-500'
     default:
-      return 'text-zinc-500'
+      return 'text-muted-foreground'
   }
 }
 
@@ -33,7 +33,7 @@ export function DroneListCard({ drones }: DroneListCardProps) {
   })
 
   return (
-    <Card className="bg-zinc-900 border-zinc-800">
+    <Card className="bg-card border-border">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-medium flex items-center gap-2">
           <Plane className="h-4 w-4" />
@@ -41,17 +41,17 @@ export function DroneListCard({ drones }: DroneListCardProps) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-2 max-h-72 overflow-y-auto no-scrollbar">
+        <div className="space-y-2">
           {sortedDrones.map(drone => (
             <div
               key={drone.id}
-              className="flex items-center justify-between p-2 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 transition-colors"
+              className="flex items-center justify-between p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
             >
               <div className="flex items-center gap-3">
                 <div className={`w-2 h-2 rounded-full ${drone.status === 'online' ? 'bg-green-500' : drone.status === 'warning' ? 'bg-yellow-500' : 'bg-red-500'}`} />
                 <div>
                   <div className="text-sm font-medium">{drone.name}</div>
-                  <div className="text-xs text-zinc-500">高度: {drone.altitude}m</div>
+                  <div className="text-xs text-muted-foreground">高度: {drone.altitude}m</div>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-xs">

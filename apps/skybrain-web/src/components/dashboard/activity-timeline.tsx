@@ -21,7 +21,7 @@ function getActivityIcon(event: string) {
     case 'land':
       return <Plane className="h-4 w-4 text-orange-500" />
     default:
-      return <Clock className="h-4 w-4 text-zinc-500" />
+      return <Clock className="h-4 w-4 text-muted-foreground" />
   }
 }
 
@@ -42,7 +42,7 @@ export function ActivityTimeline({ logs }: ActivityTimelineProps) {
   const recentLogs = [...logs].reverse().slice(0, 10)
 
   return (
-    <Card className="bg-zinc-900 border-zinc-800">
+    <Card className="bg-card border-border">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-medium flex items-center gap-2">
           <Activity className="h-4 w-4" />
@@ -50,7 +50,7 @@ export function ActivityTimeline({ logs }: ActivityTimelineProps) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-3 max-h-72 overflow-y-auto no-scrollbar">
+        <div className="space-y-3">
           {recentLogs.map((log, index) => (
             <div key={log.id} className="flex items-start gap-3">
               {/* 时间线 */}
@@ -59,7 +59,7 @@ export function ActivityTimeline({ logs }: ActivityTimelineProps) {
                   {getActivityIcon(log.event)}
                 </div>
                 {index < recentLogs.length - 1 && (
-                  <div className="w-px h-full bg-zinc-800 mt-1" />
+                  <div className="w-px h-full bg-border mt-1" />
                 )}
               </div>
 
@@ -67,19 +67,19 @@ export function ActivityTimeline({ logs }: ActivityTimelineProps) {
               <div className="flex-1 pb-3">
                 <div className="flex justify-between items-start">
                   <span className="text-sm font-medium">{log.taskName}</span>
-                  <span className="text-xs text-zinc-500 whitespace-nowrap">
+                  <span className="text-xs text-muted-foreground whitespace-nowrap">
                     {formatTime(log.timestamp)}
                   </span>
                 </div>
-                <div className="text-xs text-zinc-400">{log.message}</div>
+                <div className="text-xs text-muted-foreground">{log.message}</div>
                 {log.detail && (
-                  <div className="text-xs text-zinc-500 mt-1">{log.detail}</div>
+                  <div className="text-xs text-muted-foreground mt-1">{log.detail}</div>
                 )}
               </div>
             </div>
           ))}
           {recentLogs.length === 0 && (
-            <div className="text-center text-zinc-500 py-4 text-sm">
+            <div className="text-center text-muted-foreground py-4 text-sm">
               暂无活动记录
             </div>
           )}

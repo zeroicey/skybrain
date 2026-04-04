@@ -32,7 +32,7 @@ export function BatteryStatusCard({ batteries }: BatteryStatusCardProps) {
     if (status === 'charging') return <Zap className="h-3 w-3 text-green-500" />
     if (status === 'discharging') return <Power className="h-3 w-3 text-yellow-500" />
     if (status === 'maintenance') return <AlertTriangle className="h-3 w-3 text-red-500" />
-    return <Battery className="h-3 w-3 text-zinc-500" />
+    return <Battery className="h-3 w-3 text-muted-foreground" />
   }
 
   const getStatusLabel = (status: string) => {
@@ -43,34 +43,34 @@ export function BatteryStatusCard({ batteries }: BatteryStatusCardProps) {
   }
 
   return (
-    <Card className="bg-zinc-900 border-zinc-800">
+    <Card className="bg-card border-border max-h-75 h-full">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-medium flex items-center gap-2">
           <Battery className="h-4 w-4" />
           设备电池
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="overflow-y-auto no-scrollbar">
         <div className="grid grid-cols-4 gap-2 mb-4">
-          <div className="text-center p-2 bg-zinc-800/50 rounded-lg">
+          <div className="text-center p-2 bg-muted/50 rounded-lg">
             <div className="text-lg font-bold text-green-500">{chargingCount}</div>
-            <div className="text-xs text-zinc-400">充电中</div>
+            <div className="text-xs text-muted-foreground">充电中</div>
           </div>
-          <div className="text-center p-2 bg-zinc-800/50 rounded-lg">
+          <div className="text-center p-2 bg-muted/50 rounded-lg">
             <div className="text-lg font-bold text-yellow-500">{dischargingCount}</div>
-            <div className="text-xs text-zinc-400">使用中</div>
+            <div className="text-xs text-muted-foreground">使用中</div>
           </div>
-          <div className="text-center p-2 bg-zinc-800/50 rounded-lg">
-            <div className="text-lg font-bold text-zinc-300">{idleCount}</div>
-            <div className="text-xs text-zinc-400">空闲</div>
+          <div className="text-center p-2 bg-muted/50 rounded-lg">
+            <div className="text-lg font-bold text-foreground">{idleCount}</div>
+            <div className="text-xs text-muted-foreground">空闲</div>
           </div>
-          <div className="text-center p-2 bg-zinc-800/50 rounded-lg">
+          <div className="text-center p-2 bg-muted/50 rounded-lg">
             <div className="text-lg font-bold text-orange-500">{maintenanceCount}</div>
-            <div className="text-xs text-zinc-400">维护</div>
+            <div className="text-xs text-muted-foreground">维护</div>
           </div>
         </div>
         <div className="flex justify-between items-center text-xs mb-4">
-          <span className="text-zinc-400">平均健康度: {avgHealth}%</span>
+          <span className="text-muted-foreground">平均健康度: {avgHealth}%</span>
           <span className={needMaintenance > 0 ? 'text-yellow-500' : 'text-green-500'}>
             需维护: {needMaintenance}
           </span>
@@ -78,20 +78,20 @@ export function BatteryStatusCard({ batteries }: BatteryStatusCardProps) {
 
         {/* 电池列表 */}
         <div>
-          <div className="text-xs text-zinc-400 mb-2">电池状态</div>
-          <div className="space-y-1 max-h-48 overflow-y-auto no-scrollbar">
+          <div className="text-xs text-muted-foreground mb-2">电池状态</div>
+          <div className="space-y-1">
             {sortedBatteries.map(battery => (
-              <div key={battery.id} className="flex items-center justify-between text-xs p-1.5 bg-zinc-800/50 rounded">
+              <div key={battery.id} className="flex items-center justify-between text-xs p-1.5 bg-muted/50 rounded">
                 <div className="flex items-center gap-2 min-w-0">
                   {getBatteryIcon(battery.status)}
                   <span className="truncate">{battery.serialNumber}</span>
-                  <span className="text-zinc-500">{getStatusLabel(battery.status)}</span>
+                  <span className="text-muted-foreground">{getStatusLabel(battery.status)}</span>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <span className={getHealthColor(battery.health || 0)}>
                     {battery.health || 0}%
                   </span>
-                  <span className={battery.电量 <= 30 ? 'text-red-500' : 'text-zinc-400'}>
+                  <span className={battery.电量 <= 30 ? 'text-red-500' : 'text-muted-foreground'}>
                     {battery.电量}%
                   </span>
                 </div>

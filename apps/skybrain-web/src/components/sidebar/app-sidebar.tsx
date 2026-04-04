@@ -120,9 +120,10 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       {/* Logo 区域 - 使用 SidebarHeader 确保在顶部 */}
       <SidebarHeader className="py-4">
-        <Link to="/" className="flex items-center justify-center px-2 w-full">
-          <img src="/logo.svg" alt="SkyBrain" className="h-6 w-6 shrink-0" />
-          <span className="font-bold text-lg ml-2 group-data-[collapsible=icon]:hidden">SkyBrain</span>
+        <Link to="/" className="flex flex-col items-center px-2 w-full group-data-[collapsible=icon]:py-2">
+          <img src="/logo.svg" alt="SkyBrain" className="h-10 w-10 shrink-0 group-data-[collapsible=icon]:h-8 group-data-[collapsible=icon]:w-8" />
+          <span className="font-bold text-lg mt-1 group-data-[collapsible=icon]:hidden">SkyBrain</span>
+          <span className="text-xs text-zinc-500 group-data-[collapsible=icon]:hidden">智能无人机管理系统</span>
         </Link>
       </SidebarHeader>
 

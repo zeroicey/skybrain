@@ -43,7 +43,7 @@ export function TaskStatsCard({ tasks }: TaskStatsCardProps) {
   const completedToday = todayTasks.filter(t => t.status === 'completed').length
 
   return (
-    <Card className="bg-zinc-900 border-zinc-800">
+    <Card className="bg-card border-border h-full">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-medium flex items-center gap-2">
           <ListTodo className="h-4 w-4" />
@@ -53,22 +53,22 @@ export function TaskStatsCard({ tasks }: TaskStatsCardProps) {
       <CardContent className="space-y-4">
         {/* 今日任务 */}
         <div className="grid grid-cols-2 gap-2">
-          <div className="p-2 bg-zinc-800/50 rounded-lg text-center">
+          <div className="p-2 bg-muted/50 rounded-lg text-center">
             <div className="text-lg font-bold text-blue-500">{runningToday}</div>
-            <div className="text-xs text-zinc-400">进行中</div>
+            <div className="text-xs text-muted-foreground">进行中</div>
           </div>
-          <div className="p-2 bg-zinc-800/50 rounded-lg text-center">
+          <div className="p-2 bg-muted/50 rounded-lg text-center">
             <div className="text-lg font-bold text-green-500">{completedToday}</div>
-            <div className="text-xs text-zinc-400">今日完成</div>
+            <div className="text-xs text-muted-foreground">今日完成</div>
           </div>
         </div>
 
         {/* 任务类型 */}
         <div>
-          <div className="text-xs text-zinc-400 mb-2">任务类型分布</div>
+          <div className="text-xs text-muted-foreground mb-2">任务类型分布</div>
           <div className="flex flex-wrap gap-1">
             {Object.entries(taskTypes).map(([type, count]) => (
-              <span key={type} className="px-2 py-1 text-xs bg-zinc-800 rounded">
+              <span key={type} className="px-2 py-1 text-xs bg-muted rounded">
                 {TASK_TYPE_LABELS[type] || type}: {count}
               </span>
             ))}
@@ -77,16 +77,16 @@ export function TaskStatsCard({ tasks }: TaskStatsCardProps) {
 
         {/* 优先级 */}
         <div>
-          <div className="text-xs text-zinc-400 mb-2">优先级分布</div>
+          <div className="text-xs text-muted-foreground mb-2">优先级分布</div>
           <div className="flex flex-wrap gap-1">
             {Object.entries(priorities).map(([priority, count]) => (
               <span
                 key={priority}
                 className={`px-2 py-1 text-xs rounded ${
-                  priority === 'urgent' ? 'bg-red-900/50 text-red-400' :
-                  priority === 'high' ? 'bg-yellow-900/50 text-yellow-400' :
-                  priority === 'normal' ? 'bg-blue-900/50 text-blue-400' :
-                  'bg-zinc-800 text-zinc-400'
+                  priority === 'urgent' ? 'bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-400' :
+                  priority === 'high' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-400' :
+                  priority === 'normal' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-400' :
+                  'bg-muted text-muted-foreground'
                 }`}
               >
                 {PRIORITY_LABELS[priority] || priority}: {count}
