@@ -73,7 +73,7 @@ export function DroneStatusCard({ drones }: DroneStatusCardProps) {
         {/* 电池电量最低的无人机 */}
         <div className="mt-4">
           <div className="text-xs text-zinc-400 mb-2">电池电量</div>
-          <div className="space-y-1 max-h-32 overflow-y-auto no-scrollbar">
+          <div className="space-y-1 max-h-40 overflow-y-auto no-scrollbar">
             {lowBatteryDrones.map(drone => (
               <div key={drone.id} className="flex items-center justify-between text-xs p-1 bg-zinc-800/50 rounded">
                 <div className="flex items-center gap-2">

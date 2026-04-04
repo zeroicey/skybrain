@@ -79,7 +79,7 @@ export function BatteryStatusCard({ batteries }: BatteryStatusCardProps) {
         {/* 电池列表 */}
         <div>
           <div className="text-xs text-zinc-400 mb-2">电池状态</div>
-          <div className="space-y-1 max-h-40 overflow-y-auto no-scrollbar">
+          <div className="space-y-1 max-h-48 overflow-y-auto no-scrollbar">
             {sortedBatteries.map(battery => (
               <div key={battery.id} className="flex items-center justify-between text-xs p-1.5 bg-zinc-800/50 rounded">
                 <div className="flex items-center gap-2 min-w-0">

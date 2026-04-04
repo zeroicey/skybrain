@@ -75,7 +75,7 @@ export function TaskOverviewCard({ tasks }: TaskOverviewCardProps) {
         {/* 最近任务 */}
         <div className="mt-2">
           <div className="text-xs text-zinc-400 mb-2">最近任务</div>
-          <div className="space-y-1 max-h-40 overflow-y-auto no-scrollbar">
+          <div className="space-y-1 max-h-48 overflow-y-auto no-scrollbar">
             {recentTasks.map(task => (
               <div key={task.id} className="flex items-center justify-between text-xs p-1.5 bg-zinc-800/50 rounded">
                 <div className="flex items-center gap-2 min-w-0">

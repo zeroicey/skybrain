@@ -50,7 +50,7 @@ export function ActivityTimeline({ logs }: ActivityTimelineProps) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-3 max-h-80 overflow-y-auto no-scrollbar">
+        <div className="space-y-3 max-h-72 overflow-y-auto no-scrollbar">
           {recentLogs.map((log, index) => (
             <div key={log.id} className="flex items-start gap-3">
               {/* 时间线 */}

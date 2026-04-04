@@ -51,7 +51,7 @@ export function AlertList({ logs }: AlertListProps) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-3">
+        <div className="space-y-3 max-h-56 overflow-y-auto no-scrollbar">
           {alertLogs.map(log => (
             <div key={log.id} className="flex items-start gap-3 text-xs">
               {getAlertIcon(log.event)}
