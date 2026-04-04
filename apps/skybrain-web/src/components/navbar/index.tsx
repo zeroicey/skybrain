@@ -24,8 +24,10 @@ import UsersNav from "./contents/settings-users";
 import RolesNav from "./contents/settings-roles";
 import LogsNav from "./contents/settings-logs";
 import ConfigNav from "./contents/settings-config";
+import DashboardNav from "./contents/dashboard";
 
 const rightContents = new Map<string, React.ReactNode>([
+  ["/dashboard", <DashboardNav key="dashboard" />],
   ["/monitor/live", <MonitorLiveNav key="monitor-live" />],
   ["/monitor/playback", <MonitorPlaybackNav key="monitor-playback" />],
   ["/monitor/multi", <MonitorMultiNav key="monitor-multi" />],

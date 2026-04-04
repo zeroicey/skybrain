@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { ScanEye, RefreshCw } from 'lucide-react'
 import { DroneStatusCard } from '@/components/dashboard/drone-status-card'
 import { TaskOverviewCard } from '@/components/dashboard/task-overview-card'
 import { BatteryStatusCard } from '@/components/dashboard/battery-status-card'
@@ -10,14 +9,35 @@ import { VideoGrid } from '@/components/dashboard/video-grid'
 import { mockDrones } from '@/data/mock-drones'
 import { mockTasks, mockTaskLogs } from '@/data/mock-tasks'
 import { mockDeviceBatteries } from '@/data/mock-device-batteries'
+import { useVideoChannels, getStreamUrl } from '@/hooks/useVideoChannels'
 
 export default function DashboardPage() {
-  const [currentTime, setCurrentTime] = useState(new Date())
+  const { loading: channelsLoading, channels } = useVideoChannels()
+  const [droneVideoMap, setDroneVideoMap] = useState<Map<string, string>>(new Map())
 
+  // 过滤在线无人机
+  const onlineDronesList = mockDrones.filter(d => d.status !== 'offline')
+
+  // 分配视频流给无人机
   useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000)
-    return () => clearInterval(timer)
-  }, [])
+    if (channelsLoading || channels.length === 0) return
+
+    const newMap = new Map<string, string>()
+
+    // 随机打乱 channels 并分配给在线无人机
+    const shuffledChannels = [...channels].sort(() => Math.random() - 0.5)
+
+    onlineDronesList.forEach((drone, index) => {
+      // 如果是真实无人机（MJPEG 流），直接使用无人机的 streamUrl
+      if (drone.isMjpg && drone.streamUrl) {
+        newMap.set(drone.id, drone.streamUrl)
+      } else if (shuffledChannels[index]) {
+        newMap.set(drone.id, getStreamUrl(shuffledChannels[index].id, channels))
+      }
+    })
+
+    setDroneVideoMap(newMap)
+  }, [channelsLoading, channels, onlineDronesList])
 
   // 计算统计数据
   const onlineDrones = mockDrones.filter(d => d.status === 'online').length
@@ -32,38 +52,6 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      {/* 顶部标题栏 */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <ScanEye className="h-8 w-8 text-sky-500" />
-          <div>
-            <h1 className="text-2xl font-bold">SkyBrain 终端</h1>
-            <p className="text-sm text-zinc-400">智能无人机管理系统</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="text-right">
-            <div className="text-sm text-zinc-400">
-              {currentTime.toLocaleDateString('zh-CN', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </div>
-            <div className="text-lg font-mono">
-              {currentTime.toLocaleTimeString('zh-CN', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-              })}
-            </div>
-          </div>
-          <button className="p-2 hover:bg-zinc-800 rounded-lg transition-colors">
-            <RefreshCw className="h-5 w-5 text-zinc-400" />
-          </button>
-        </div>
-      </div>
-
       {/* 状态卡片行 */}
       <div className="grid grid-cols-4 gap-4">
         <DroneStatusCard drones={mockDrones} />
@@ -88,7 +76,11 @@ export default function DashboardPage() {
             ({onlineDrones} 架在线)
           </span>
         </h2>
-        <VideoGrid drones={mockDrones} />
+        <VideoGrid
+          drones={onlineDronesList}
+          videoMap={droneVideoMap}
+          isLoading={channelsLoading}
+        />
       </div>
     </div>
   )
