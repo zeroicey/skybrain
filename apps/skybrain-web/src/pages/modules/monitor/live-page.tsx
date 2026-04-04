@@ -28,17 +28,28 @@ export default function LivePage() {
 
   // 根据无人机索引获取对应的视频流
   const [streamUrl, setStreamUrl] = useState<string | null>(null)
+  const [isMjpg, setIsMjpg] = useState(false)
 
   // 当 channels 加载完成后，设置对应的视频流
   useEffect(() => {
+    if (!selectedDrone) {
+      setStreamUrl(null)
+      setIsMjpg(false)
+      return
+    }
+
+    // 如果是真实无人机（MJPEG 流），直接使用无人机的 streamUrl
+    if (selectedDrone.isMjpg && selectedDrone.streamUrl) {
+      setStreamUrl(selectedDrone.streamUrl)
+      setIsMjpg(true)
+      return
+    }
+
     if (channelsLoading || channels.length === 0) {
       return
     }
 
-    if (!selectedDrone) {
-      setStreamUrl(null)
-      return
-    }
+    setIsMjpg(false)
 
     // 获取所有在线无人机
     const onlineDrones = mockDrones.filter(d => d.status !== 'offline')
@@ -50,7 +61,7 @@ export default function LivePage() {
     } else if (channels.length > 0) {
       setStreamUrl(getStreamUrl(channels[0].id, channels))
     }
-  }, [selectedDroneId, channelsLoading, channels])
+  }, [selectedDroneId, channelsLoading, channels, selectedDrone])
 
   // 模拟播放时间递增
   useEffect(() => {
@@ -105,6 +116,7 @@ export default function LivePage() {
             streamUrl={streamUrl}
             isLoading={channelsLoading || !streamUrl}
             isOffline={selectedDrone?.status === 'offline'}
+            isMjpg={isMjpg}
           />
 
           <div className="mt-4">

@@ -8,6 +8,7 @@ interface VideoCardProps {
   drone: Drone
   onFullscreen?: (drone: Drone) => void
   streamUrl?: string
+  isMjpg?: boolean
   className?: string
 }
 
@@ -17,7 +18,7 @@ const statusColors = {
   warning: 'bg-yellow-500',
 }
 
-export function VideoCard({ drone, onFullscreen, streamUrl, className }: VideoCardProps) {
+export function VideoCard({ drone, onFullscreen, streamUrl, isMjpg, className }: VideoCardProps) {
   return (
     <div className={cn('relative rounded-lg overflow-hidden border bg-card group', className)}>
       {/* 视频区域 */}
@@ -28,7 +29,7 @@ export function VideoCard({ drone, onFullscreen, streamUrl, className }: VideoCa
             <span className="text-sm">离线</span>
           </div>
         ) : streamUrl ? (
-          <VideoPlayer streamUrl={streamUrl} />
+          <VideoPlayer streamUrl={streamUrl} isMjpg={isMjpg} />
         ) : (
           <div className="flex flex-col items-center gap-2 text-muted-foreground">
             <Loader2 className="h-12 w-12 animate-spin" />

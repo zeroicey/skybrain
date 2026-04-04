@@ -27,7 +27,10 @@ export default function MultiMonitorPage() {
       const newMap = new Map<string, string>()
 
       activeDrones.forEach((drone, index) => {
-        if (randomChannels[index]) {
+        // 如果是真实无人机（MJPEG 流），直接使用无人机的 streamUrl
+        if (drone.isMjpg && drone.streamUrl) {
+          newMap.set(drone.id, drone.streamUrl)
+        } else if (randomChannels[index]) {
           newMap.set(drone.id, getStreamUrl(randomChannels[index].id, channels))
         }
       })
