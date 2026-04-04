@@ -6,7 +6,7 @@ import CtaSection from '@/components/landing/cta-section'
 
 export default function LandingPage() {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full overflow-auto no-scrollbar">
       <HeroSection />
       <TechSection />
       <ShowcaseSection />
