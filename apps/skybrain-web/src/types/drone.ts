@@ -7,6 +7,7 @@ export interface Drone {
   battery: number
   altitude: number
   streamUrl: string
+  isMjpg?: boolean  // 是否为 MJPEG 实时流
 }
 
 export type VideoQuality = '流畅' | '高清' | '4K'
