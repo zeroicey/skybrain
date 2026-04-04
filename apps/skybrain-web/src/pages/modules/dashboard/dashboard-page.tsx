@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useVideoChannels, getStreamUrl } from '@/hooks/useVideoChannels'
+import { useDashboardStore } from '@/stores/dashboard-store'
 import { DroneStatusCard } from '@/components/dashboard/drone-status-card'
 import { TaskOverviewCard } from '@/components/dashboard/task-overview-card'
 import { BatteryStatusCard } from '@/components/dashboard/battery-status-card'
@@ -9,11 +11,10 @@ import { VideoGrid } from '@/components/dashboard/video-grid'
 import { mockDrones } from '@/data/mock-drones'
 import { mockTasks, mockTaskLogs } from '@/data/mock-tasks'
 import { mockDeviceBatteries } from '@/data/mock-device-batteries'
-import { useVideoChannels, getStreamUrl } from '@/hooks/useVideoChannels'
 
 export default function DashboardPage() {
   const { loading: channelsLoading, channels } = useVideoChannels()
-  const [droneVideoMap, setDroneVideoMap] = useState<Map<string, string>>(new Map())
+  const { droneVideoMap, setDroneVideoMap } = useDashboardStore()
 
   // 过滤在线无人机
   const onlineDronesList = mockDrones.filter(d => d.status !== 'offline')
@@ -37,7 +38,7 @@ export default function DashboardPage() {
     })
 
     setDroneVideoMap(newMap)
-  }, [channelsLoading, channels, onlineDronesList])
+  }, [channelsLoading, channels, onlineDronesList, setDroneVideoMap])
 
   // 计算统计数据
   const onlineDrones = mockDrones.filter(d => d.status === 'online').length
