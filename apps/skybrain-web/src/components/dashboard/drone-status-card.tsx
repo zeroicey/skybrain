@@ -1,4 +1,4 @@
-import { Drone, Wifi, WifiOff, AlertTriangle } from 'lucide-react'
+import { Drone } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import type { Drone as DroneType } from '@/types/drone'
 

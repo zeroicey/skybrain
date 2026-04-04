@@ -1,4 +1,4 @@
-import { ListTodo, Play, Clock, CheckCircle, XCircle } from 'lucide-react'
+import { ListTodo } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import type { Task } from '@/types/task'
 

@@ -1,4 +1,4 @@
-import { Home, Video, ListTodo, Plane, BarChart, Settings, Bot, Users, User, Clock, Battery, Warehouse, Map, FileText, Mic, MessageSquare, FileEdit, Eye, Play, Grid3X3, Plus, Calendar, Drone, ClipboardList, ScanEye, TrendingUp, Utensils, Building2, GraduationCap, DoorOpen, UsersRound } from "lucide-react"
+import { Home, Video, ListTodo, Plane, Settings, Bot, Users, User, Clock, Battery, Warehouse, Map, FileText, Mic, MessageSquare, FileEdit, Eye, Play, Grid3X3, Plus, Calendar, Drone, ClipboardList, ScanEye, TrendingUp, Utensils, Building2, GraduationCap, DoorOpen, UsersRound } from "lucide-react"
 
 import {
   Sidebar,
@@ -23,7 +23,6 @@ const navItems = [
     icon: Home,
     items: [
       { title: "仪表盘", url: "/dashboard", icon: Home },
-      { title: "数据大屏", url: "/analytics/overview", icon: BarChart },
     ],
   },
   {
@@ -130,10 +129,12 @@ export function AppSidebar() {
       <SidebarContent>
         {navItems.map((item) => (
           <SidebarGroup key={item.title}>
-            <SidebarGroupLabel className="px-2 py-1 text-xs font-medium text-muted-foreground">
-              <item.icon className="h-3 w-3 inline mr-1" />
-              <span className="group-data-[collapsible=icon]:hidden">{item.title}</span>
-            </SidebarGroupLabel>
+            {item.title !== "仪表盘" && (
+              <SidebarGroupLabel className="px-2 py-1 text-xs font-medium text-muted-foreground">
+                <item.icon className="h-3 w-3 inline mr-1" />
+                <span className="group-data-[collapsible=icon]:hidden">{item.title}</span>
+              </SidebarGroupLabel>
+            )}
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((subItem) => (

@@ -21,10 +21,6 @@ export default function DashboardPage() {
 
   // 计算统计数据
   const onlineDrones = mockDrones.filter(d => d.status === 'online').length
-  const runningTasks = mockTasks.filter(t => t.status === 'running').length
-  const completedToday = mockTasks.filter(t =>
-    t.status === 'completed' && t.endTime?.startsWith(new Date().toISOString().split('T')[0])
-  ).length
   const successRate = mockTasks.length > 0
     ? Math.round(((mockTasks.length - mockTasks.filter(t => t.status === 'failed' || t.status === 'cancelled').length) / mockTasks.length) * 100)
     : 100

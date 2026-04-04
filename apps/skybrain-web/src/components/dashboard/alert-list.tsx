@@ -1,4 +1,4 @@
-import { AlertTriangle, AlertCircle, Info, Clock } from 'lucide-react'
+import { AlertTriangle, AlertCircle, Info } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import type { TaskLog } from '@/types/task'
 

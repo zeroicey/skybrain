@@ -38,6 +38,10 @@ const RolesPage = lazy(() => import("@/pages/modules/setting/roles-page"));
 const LogsPage = lazy(() => import("@/pages/modules/setting/logs-page"));
 const ConfigPage = lazy(() => import("@/pages/modules/setting/config-page"));
 
+const FlightRoutesPage = lazy(() => import("@/pages/modules/flight/routes-page"));
+const FlightRouteTeachPage = lazy(() => import("@/pages/modules/flight/route-teach-page"));
+const FlightRouteDetailPage = lazy(() => import("@/pages/modules/flight/route-detail-page"));
+
 
 const router = createBrowserRouter([
     {
@@ -97,6 +101,14 @@ const router = createBrowserRouter([
                             { path: "roles", Component: RolesPage },
                             { path: "logs", Component: LogsPage },
                             { path: "config", Component: ConfigPage },
+                        ]
+                    },
+                    {
+                        path: "flight",
+                        children: [
+                            { path: "routes", Component: FlightRoutesPage },
+                            { path: "routes/teach", Component: FlightRouteTeachPage },
+                            { path: "routes/:id", Component: FlightRouteDetailPage },
                         ]
                     },
                 ],

@@ -1,4 +1,4 @@
-import { Battery, Zap, Power, Idle } from 'lucide-react'
+import { Battery } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import type { Battery as BatteryType } from '@/types/drone'
 
@@ -10,7 +10,6 @@ export function BatteryStatusCard({ batteries }: BatteryStatusCardProps) {
   const chargingCount = batteries.filter(b => b.status === 'charging').length
   const dischargingCount = batteries.filter(b => b.status === 'discharging').length
   const idleCount = batteries.filter(b => b.status === 'idle').length
-  const maintenanceCount = batteries.filter(b => b.status === 'maintenance').length
 
   const avgHealth = batteries.length > 0
     ? Math.round(batteries.reduce((sum, b) => sum + (b.health || 0), 0) / batteries.length)
