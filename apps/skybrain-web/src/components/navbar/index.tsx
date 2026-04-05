@@ -26,6 +26,9 @@ import LogsNav from "./contents/settings-logs";
 import ConfigNav from "./contents/settings-config";
 import DashboardNav from "./contents/dashboard";
 import FlightRoutesNav from "./contents/flight-routes";
+import AIVoiceNav from "./contents/ai-voice";
+import AIChatNav from "./contents/ai-chat";
+import AITaskCreateNav from "./contents/ai-task-create";
 
 const rightContents = new Map<string, React.ReactNode>([
   ["/dashboard", <DashboardNav key="dashboard" />],
@@ -52,6 +55,9 @@ const rightContents = new Map<string, React.ReactNode>([
   ["/settings/logs", <LogsNav key="settings-logs" />],
   ["/settings/config", <ConfigNav key="settings-config" />],
   ["/flight/routes", <FlightRoutesNav key="flight-routes" />],
+  ["/ai/voice", <AIVoiceNav key="ai-voice" />],
+  ["/ai/chat", <AIChatNav key="ai-chat" />],
+  ["/ai/task-create", <AITaskCreateNav key="ai-task-create" />],
 ]);
 
 // 动态匹配 /tasks/:id 和 /tasks/:id/edit

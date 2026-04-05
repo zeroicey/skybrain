@@ -42,6 +42,10 @@ const FlightRoutesPage = lazy(() => import("@/pages/modules/flight/routes-page")
 const FlightRouteTeachPage = lazy(() => import("@/pages/modules/flight/route-teach-page"));
 const FlightRouteDetailPage = lazy(() => import("@/pages/modules/flight/route-detail-page"));
 
+const AIVoicePage = lazy(() => import("@/pages/modules/ai/voice-page"));
+const AIChatPage = lazy(() => import("@/pages/modules/ai/chat-page"));
+const AITaskCreatePage = lazy(() => import("@/pages/modules/ai/task-create-page"));
+
 
 const router = createBrowserRouter([
     {
@@ -109,6 +113,14 @@ const router = createBrowserRouter([
                             { path: "routes", Component: FlightRoutesPage },
                             { path: "routes/teach", Component: FlightRouteTeachPage },
                             { path: "routes/:id", Component: FlightRouteDetailPage },
+                        ]
+                    },
+                    {
+                        path: "ai",
+                        children: [
+                            { path: "voice", Component: AIVoicePage },
+                            { path: "chat", Component: AIChatPage },
+                            { path: "task-create", Component: AITaskCreatePage },
                         ]
                     },
                 ],
