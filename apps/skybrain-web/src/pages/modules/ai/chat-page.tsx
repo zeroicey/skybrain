@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useAIStore } from '@/stores/ai-store'
 import { chatWithAI, mockQuickReplies } from '@/data/mock-ai'
 import { ChatHeader } from '@/components/ai/chat/chat-header'
