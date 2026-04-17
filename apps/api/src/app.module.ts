@@ -6,6 +6,7 @@ import { DronesModule } from './drones/drones.module';
 import { UsersModule } from './users/users.module';
 import configuration from './config/configuration';
 import { validate } from './config/validation';
+import { StorageModule } from './storage/storage.module';
 
 const nodeEnv = process.env.NODE_ENV ?? 'development';
 
@@ -22,7 +23,10 @@ const nodeEnv = process.env.NODE_ENV ?? 'development';
       isGlobal: true,
       cache: true,
     }),
-    DronesModule, UsersModule],
+    DronesModule,
+    UsersModule,
+    StorageModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

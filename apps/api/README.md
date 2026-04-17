@@ -25,6 +25,10 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Project Docs
+
+- MinIO integration guide: [docs/minio.md](docs/minio.md)
+
 ## Project setup
 
 ```bash
