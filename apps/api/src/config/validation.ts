@@ -42,6 +42,21 @@ export const validationSchema = z
             .enum(['true', 'false'])
             .default('false')
             .transform((value) => value === 'true'),
+
+        // Logger
+        LOG_LEVEL: z
+            .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent'])
+            .optional(),
+        LOG_PRETTY: z
+            .enum(['true', 'false'])
+            .optional()
+            .transform((value) => {
+                if (value === undefined) {
+                    return undefined
+                }
+
+                return value === 'true'
+            }),
     })
     .superRefine((config, ctx) => {
         if (config.DATABASE_URL) {

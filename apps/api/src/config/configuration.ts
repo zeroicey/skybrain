@@ -22,6 +22,8 @@ const parseEnvBoolean = (value: string | undefined, fallback = false): boolean =
 }
 
 export default () => ({
+    isProduction: process.env.NODE_ENV === 'production',
+
     // 服务器配置
     server: {
         port: parseEnvPort(process.env.PORT, 3000),
@@ -63,5 +65,16 @@ export default () => ({
         secretKey: process.env.MINIO_SECRET_KEY,
         bucketName: process.env.MINIO_BUCKET_NAME,
         useSSL: parseEnvBoolean(process.env.MINIO_USE_SSL, false),
+    },
+
+    // Logger 配置
+    logger: {
+        level:
+            process.env.LOG_LEVEL ||
+            (process.env.NODE_ENV === 'production' ? 'info' : 'debug'),
+        pretty: parseEnvBoolean(
+            process.env.LOG_PRETTY,
+            process.env.NODE_ENV !== 'production',
+        ),
     },
 });

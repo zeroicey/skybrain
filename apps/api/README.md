@@ -28,6 +28,7 @@
 ## Project Docs
 
 - MinIO integration guide: [docs/minio.md](docs/minio.md)
+- Pino logger guide: [docs/pino.md](docs/pino.md)
 
 ## Project setup
 
