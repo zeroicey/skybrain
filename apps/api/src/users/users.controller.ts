@@ -4,6 +4,7 @@ import {
   DefaultValuePipe,
   Delete,
   Get,
+  Logger,
   Param,
   ParseIntPipe,
   Patch,
@@ -16,10 +17,13 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
+  private readonly logger = new Logger(UsersController.name);
+
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
+    this.logger.debug('Create user request received');
     return this.usersService.create(createUserDto);
   }
 
@@ -28,11 +32,13 @@ export class UsersController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(20), ParseIntPipe) limit: number,
   ) {
+    this.logger.debug(`List users request received page=${page}, limit=${limit}`);
     return this.usersService.findAll(page, limit);
   }
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
+    this.logger.debug(`Get user request received id=${id}`);
     return this.usersService.findOne(id);
   }
 
@@ -41,11 +47,13 @@ export class UsersController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
   ) {
+    this.logger.debug(`Update user request received id=${id}`);
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
+    this.logger.debug(`Delete user request received id=${id}`);
     return this.usersService.remove(id);
   }
 }
